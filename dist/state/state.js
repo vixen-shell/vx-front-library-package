@@ -1,8 +1,8 @@
-var l = Object.defineProperty;
-var v = (i, t, e) => t in i ? l(i, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : i[t] = e;
-var c = (i, t, e) => (v(i, typeof t != "symbol" ? t + "" : t, e), e);
-import { jsx as f } from "react/jsx-runtime";
-import { createContext as p, useReducer as E, useEffect as m, useContext as T } from "react";
+var v = Object.defineProperty;
+var l = (i, t, e) => t in i ? v(i, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : i[t] = e;
+var c = (i, t, e) => (l(i, typeof t != "symbol" ? t + "" : t, e), e);
+import { jsx as E } from "react/jsx-runtime";
+import { createContext as f, useReducer as p, useEffect as m, useContext as y } from "react";
 import { Api as s } from "../api/api.js";
 const r = class r {
   static set initialState(t) {
@@ -29,8 +29,8 @@ const r = class r {
 };
 c(r, "_initialState"), c(r, "_reducer");
 let o = r;
-const u = p(void 0), _ = ({ children: i }) => {
-  const [t, e] = E(
+const u = f(void 0), P = ({ children: i }) => {
+  const [t, e] = p(
     o.reducer,
     o.initialState
   );
@@ -41,25 +41,25 @@ const u = p(void 0), _ = ({ children: i }) => {
         payload: a.value
       });
     }
-    return s.events.addListener("UPDATE_STATE", n), () => {
-      s.events.removeListener("UPDATE_STATE", n);
+    return s.stateEvents.addEventListener("UPDATE", n), () => {
+      s.stateEvents.removeEventListener("UPDATE", n);
     };
-  }, []), /* @__PURE__ */ f(u.Provider, { value: { state: t, dispatch: e }, children: i });
-}, h = () => {
-  const i = T(u);
+  }, []), /* @__PURE__ */ E(u.Provider, { value: { state: t, dispatch: e }, children: i });
+}, g = () => {
+  const i = y(u);
   if (!i)
     throw new Error(
       "useFeatureState must be used within a FeatureStateProvider."
     );
   const { state: t } = i;
   return { getStateItem: (d) => t[d], setStateItem: (d, S) => {
-    s.events.send({ id: "SET_STATE", data: { key: d, value: S } });
+    s.stateEvents.send_event({ id: "SET", data: { key: d, value: S } });
   }, saveState: () => {
-    s.events.send({ id: "SAVE_STATE" });
+    s.stateEvents.send_event({ id: "SAVE" });
   } };
 };
 export {
   o as GlobalState,
-  _ as GlobalStateProvider,
-  h as useGlobalState
+  P as GlobalStateProvider,
+  g as useGlobalState
 };

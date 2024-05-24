@@ -10,18 +10,9 @@ export declare class Feature {
             setRoute: import("react").Dispatch<import("react").SetStateAction<string>>;
         };
         readonly State: () => {
-            getStateItem: (key: string) => string | number | boolean | null;
-            setStateItem: (key: string, value: string | number | boolean | null) => void;
+            getStateItem: (key: string) => any;
+            setStateItem: (key: string, value: unknown) => void;
             saveState: () => void;
-        };
-        readonly LogListener: () => {
-            logListening: boolean;
-            setLogListening: import("react").Dispatch<import("react").SetStateAction<boolean>>;
-            logData?: import("../api").EventData.Log | undefined;
-        };
-        readonly LogHistory: () => {
-            logHistory: import("../api").EventData.Log[];
-            latestLog?: import("../api").EventData.Log | undefined;
         };
     };
     static get Link(): import("react").FC<{
@@ -29,5 +20,4 @@ export declare class Feature {
         route: string;
         children: import("react").ReactNode;
     }>;
-    static get log(): (log: import("../api").EventData.Log) => Promise<void>;
 }

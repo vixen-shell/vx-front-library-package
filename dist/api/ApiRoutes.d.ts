@@ -9,6 +9,7 @@ export declare class ApiRoutes {
     get FEATURE_START(): string;
     get FEATURE_STOP(): string;
     get FEATURE_STATE(): string;
+    get FEATURE_STATE_EVENTS(): string;
     get FEATURE_LOG_LISTENER(): string;
     get FEATURE_LOG_LISTENER_TOGGLE(): string;
     get FEATURE_PIPE(): string;

@@ -1,89 +1,60 @@
 var E = Object.defineProperty;
-var w = (n, t, s) => t in n ? E(n, t, { enumerable: !0, configurable: !0, writable: !0, value: s }) : n[t] = s;
-var o = (n, t, s) => (w(n, typeof t != "symbol" ? t + "" : t, s), s);
-import { ApiRoutes as g } from "./ApiRoutes.js";
-import { ApiEvents as f } from "./ApiEvents.js";
-function l(n, t) {
-  if (r.isInit)
+var u = (i, e, r) => e in i ? E(i, e, { enumerable: !0, configurable: !0, writable: !0, value: r }) : i[e] = r;
+var s = (i, e, r) => (u(i, typeof e != "symbol" ? e + "" : e, r), r);
+import { ApiRoutes as c } from "./ApiRoutes.js";
+import { SocketEventHandler as w } from "./SocketEventHandler.js";
+function f(i, e) {
+  if (a.isInit)
     return async () => {
-      const s = await fetch(n);
-      if (!s.ok)
+      const r = await fetch(i);
+      if (!r.ok)
         try {
-          const a = await s.json();
-          throw new Error(a.message);
-        } catch (a) {
-          throw new Error(a.message);
+          const n = await r.json();
+          throw new Error(n.message);
+        } catch (n) {
+          throw new Error(n.message);
         }
-      const c = await s.json();
-      if (t in c)
-        return c[t];
-      throw new Error(`Unable to acces ${t}`);
+      const o = await r.json();
+      if (e in o)
+        return o[e];
+      throw new Error(`Unable to acces ${e}`);
     };
   throw new Error("Api not initialized");
 }
-const i = class i {
-  static get logListener() {
-    return i._logListener;
-  }
-  static set logListener(t) {
-    (async (c) => {
-      const a = l(
-        r.routes.FEATURE_LOG_LISTENER,
-        "log_listener"
-      ), u = l(
-        r.routes.FEATURE_LOG_LISTENER_TOGGLE,
-        "log_listener"
-      );
-      await a() !== c && await u();
-    })(t), i._logListener = t;
-  }
-  static async log(t) {
-    r.events.send({ id: "LOG", data: t });
-  }
-  static get logs() {
-    return l(r.routes.LOGS, "logs");
-  }
-  static addListener(t) {
-    i.logListener || (i.logListener = !0), r.events.addListener("LOG", t);
-  }
-  static removeListener(t) {
-    r.events.removeListener("LOG", t), !r.events.hasListeners("LOG") && i.logListener && (i.logListener = !1);
-  }
-};
-o(i, "_logListener", !1);
-let L = i;
-const e = class e {
-  static async init(t, s) {
-    if (!await e.ping())
+const t = class t {
+  static async init(e, r) {
+    if (!await t.ping())
       throw new Error("Unable to acces Vixen Api.");
-    e._routes = new g(t, s), e._events = new f(e._routes.FEATURE_PIPE), e._isInit = !0;
+    t._routes = new c(e, r), t._stateEvents = new w(
+      t._routes.FEATURE_STATE_EVENTS
+    ), t._isInit = !0;
   }
   static get isInit() {
-    return e._isInit;
+    return t._isInit;
   }
   static async ping() {
     try {
-      return !!(await fetch(g.PING)).ok;
+      return !!(await fetch(c.PING)).ok;
     } catch {
       return !1;
     }
   }
-  static get events() {
-    if (e._events)
-      return e._events;
+  static get routes() {
+    if (t._routes)
+      return t._routes;
     throw new Error("Api not initialized");
   }
-  static get routes() {
-    if (e._routes)
-      return e._routes;
+  static get stateEvents() {
+    if (t._stateEvents)
+      return t._stateEvents;
     throw new Error("Api not initialized");
   }
   static get featureState() {
-    return l(e.routes.FEATURE_STATE, "state");
+    return f(t.routes.FEATURE_STATE, "state");
   }
 };
-o(e, "_routes"), o(e, "_events"), o(e, "_isInit", !1), o(e, "Logger", L);
-let r = e;
+s(t, "_routes"), s(t, "_stateEvents"), s(t, "_isInit", !1);
+let a = t;
 export {
-  r as Api
+  a as Api
 };

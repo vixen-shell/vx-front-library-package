@@ -1,6 +1,6 @@
-var _ = Object.defineProperty;
-var E = (a, t, r) => t in a ? _(a, t, { enumerable: !0, configurable: !0, writable: !0, value: r }) : a[t] = r;
-var u = (a, t, r) => (E(a, typeof t != "symbol" ? t + "" : t, r), r);
+var E = Object.defineProperty;
+var _ = (a, t, r) => t in a ? E(a, t, { enumerable: !0, configurable: !0, writable: !0, value: r }) : a[t] = r;
+var u = (a, t, r) => (_(a, typeof t != "symbol" ? t + "" : t, r), r);
 function e(a, t) {
   const [r, s] = ["localhost", "6481"];
   return `${a}://${r}:${s}${t}`;
@@ -22,6 +22,9 @@ class h {
   }
   get FEATURE_STATE() {
     return e("http", `/feature/${this._featureName}/state`);
+  }
+  get FEATURE_STATE_EVENTS() {
+    return e("ws", `/feature/${this._featureName}/state`);
   }
   get FEATURE_LOG_LISTENER() {
     return e("http", `/feature/${this._featureName}/log_listener`);

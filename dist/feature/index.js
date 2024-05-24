@@ -1,50 +1,36 @@
-var g = Object.defineProperty;
-var f = (r, t, e) => t in r ? g(r, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : r[t] = e;
-var n = (r, t, e) => (f(r, typeof t != "symbol" ? t + "" : t, e), e);
-import { jsx as l } from "react/jsx-runtime";
-import { Routes as L, useRouter as m, RouterLink as c } from "../router/router.js";
-import { GlobalState as p, useGlobalState as R } from "../state/state.js";
-import { Api as S } from "../api/api.js";
-import { useLogListener as d, useLogHistory as w } from "../api/hooks.js";
-import y from "./FeatureRender.js";
-function i(r, t) {
-  if (!s.isInit)
-    throw new Error(`Cannot use '${r}' before feature initialization`);
+var f = Object.defineProperty;
+var l = (e, t, i) => t in e ? f(e, t, { enumerable: !0, configurable: !0, writable: !0, value: i }) : e[t] = i;
+var n = (e, t, i) => (l(e, typeof t != "symbol" ? t + "" : t, i), i);
+import { jsx as m } from "react/jsx-runtime";
+import { Routes as c, useRouter as R, RouterLink as p } from "../router/router.js";
+import { GlobalState as S, useGlobalState as d } from "../state/state.js";
+import w from "./FeatureRender.js";
+function o(e, t) {
+  if (!a.isInit)
+    throw new Error(`Cannot use '${e}' before feature initialization`);
   return t;
 }
-const o = class o {
+const r = class r {
   static init(t) {
-    if (o.isInit)
+    if (r.isInit)
       throw new Error("Feature is already initialized");
-    L.define(t);
-    const e = (a, u) => (p.initialState = u, /* @__PURE__ */ l(y, { initialRoute: a }));
-    return o.isInit = !0, e;
+    c.define(t);
+    const i = (s, u) => (S.initialState = u, /* @__PURE__ */ m(w, { initialRoute: s }));
+    return r.isInit = !0, i;
   }
   static get Link() {
-    return i("Link", c);
+    return o("Link", p);
   }
-  static get log() {
-    return i("log", S.Logger.log);
-  }
-  // static get Events() {
-  //     return $<typeof Api.events>('Events', Api.events)
-  // }
 };
-n(o, "isInit", !1), n(o, "Use", {
+n(r, "isInit", !1), n(r, "Use", {
   get Router() {
-    return i("Router", m);
+    return o("Router", R);
   },
   get State() {
-    return i("State", R);
-  },
-  get LogListener() {
-    return i("LogListener", d);
-  },
-  get LogHistory() {
-    return i("LogHistory", w);
+    return o("State", d);
   }
 });
-let s = o;
+let a = r;
 export {
-  s as Feature
+  a as Feature
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+/// <reference types="react" />
 declare const FeatureRender: React.FC<{
     initialRoute: string;
 }>;

@@ -1,11 +1,9 @@
 import { jsx as r } from "react/jsx-runtime";
 import { GlobalStateProvider as o } from "../state/state.js";
-import { RouterProvider as t, RouterRender as i } from "../router/router.js";
-import { useEffect as m } from "react";
-import f from "./initFeature.js";
-const l = ({
+import { RouterProvider as t, RouterRender as d } from "../router/router.js";
+const a = ({
   initialRoute: e
-}) => (m(f, []), /* @__PURE__ */ r(o, { children: /* @__PURE__ */ r(t, { initialRoute: e, children: /* @__PURE__ */ r(i, {}) }) }));
+}) => /* @__PURE__ */ r(o, { children: /* @__PURE__ */ r(t, { initialRoute: e, children: /* @__PURE__ */ r(d, {}) }) });
 export {
-  l as default
+  a as default
 };
