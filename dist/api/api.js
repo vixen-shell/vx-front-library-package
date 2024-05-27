@@ -1,8 +1,8 @@
-var E = Object.defineProperty;
-var u = (i, e, r) => e in i ? E(i, e, { enumerable: !0, configurable: !0, writable: !0, value: r }) : i[e] = r;
-var s = (i, e, r) => (u(i, typeof e != "symbol" ? e + "" : e, r), r);
+var u = Object.defineProperty;
+var w = (i, e, r) => e in i ? u(i, e, { enumerable: !0, configurable: !0, writable: !0, value: r }) : i[e] = r;
+var s = (i, e, r) => (w(i, typeof e != "symbol" ? e + "" : e, r), r);
 import { ApiRoutes as c } from "./ApiRoutes.js";
-import { SocketEventHandler as w } from "./SocketEventHandler.js";
+import { SocketEventHandler as E } from "./SocketEventHandler.js";
 function f(i, e) {
   if (a.isInit)
     return async () => {
@@ -22,11 +22,11 @@ function f(i, e) {
   throw new Error("Api not initialized");
 }
 const t = class t {
-  static async init(e, r) {
+  static async init(e) {
     if (!await t.ping())
       throw new Error("Unable to acces Vixen Api.");
-    t._routes = new c(e, r), t._stateEvents = new w(
-      t._routes.FEATURE_STATE_EVENTS
+    t._routes = new c(e), t._stateEvents = new E(
+      t._routes.FEATURE_STATE_SOCKET
     ), t._isInit = !0;
   }
   static get isInit() {

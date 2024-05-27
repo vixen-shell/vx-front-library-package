@@ -1,18 +1,17 @@
-var E = Object.defineProperty;
-var _ = (a, t, r) => t in a ? E(a, t, { enumerable: !0, configurable: !0, writable: !0, value: r }) : a[t] = r;
-var u = (a, t, r) => (_(a, typeof t != "symbol" ? t + "" : t, r), r);
-function e(a, t) {
-  const [r, s] = ["localhost", "6481"];
-  return `${a}://${r}:${s}${t}`;
+var h = Object.defineProperty;
+var E = (r, t, a) => t in r ? h(r, t, { enumerable: !0, configurable: !0, writable: !0, value: a }) : r[t] = a;
+var s = (r, t, a) => (E(r, typeof t != "symbol" ? t + "" : t, a), a);
+function e(r, t) {
+  const [a, u] = ["localhost", "6481"];
+  return `${r}://${a}:${u}${t}`;
 }
-class h {
-  constructor(t, r) {
-    u(this, "_featureName");
-    u(this, "_clientId");
-    u(this, "LOGS", e("http", "/logs"));
-    u(this, "LOG", e("http", "/log"));
-    u(this, "FEATURE_NAME", e("http", "/features/names"));
-    this._featureName = t, this._clientId = r;
+class f {
+  constructor(t) {
+    s(this, "_featureName");
+    s(this, "LOGS", e("http", "/logs"));
+    s(this, "LOG", e("http", "/log"));
+    s(this, "FEATURE_NAME", e("http", "/features/names"));
+    this._featureName = t;
   }
   get FEATURE_START() {
     return e("http", `/feature/${this._featureName}/start`);
@@ -23,17 +22,8 @@ class h {
   get FEATURE_STATE() {
     return e("http", `/feature/${this._featureName}/state`);
   }
-  get FEATURE_STATE_EVENTS() {
+  get FEATURE_STATE_SOCKET() {
     return e("ws", `/feature/${this._featureName}/state`);
-  }
-  get FEATURE_LOG_LISTENER() {
-    return e("http", `/feature/${this._featureName}/log_listener`);
-  }
-  get FEATURE_LOG_LISTENER_TOGGLE() {
-    return e("http", `/feature/${this._featureName}/log_listener/toggle`);
-  }
-  get FEATURE_PIPE() {
-    return e("ws", `/feature/${this._featureName}/pipe/${this._clientId}`);
   }
   get FRAME_IDS() {
     return e("http", `/frames/${this._featureName}/ids`);
@@ -48,7 +38,7 @@ class h {
     return e("http", `/frame/${this._featureName}/close/${t}`);
   }
 }
-u(h, "PING", e("http", "/ping"));
+s(f, "PING", e("http", "/ping"));
 export {
-  h as ApiRoutes
+  f as ApiRoutes
 };
