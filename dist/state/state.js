@@ -1,9 +1,9 @@
-var v = Object.defineProperty;
-var l = (i, t, e) => t in i ? v(i, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : i[t] = e;
-var c = (i, t, e) => (l(i, typeof t != "symbol" ? t + "" : t, e), e);
-import { jsx as E } from "react/jsx-runtime";
+var l = Object.defineProperty;
+var E = (i, t, e) => t in i ? l(i, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : i[t] = e;
+var c = (i, t, e) => (E(i, typeof t != "symbol" ? t + "" : t, e), e);
+import { jsx as S } from "react/jsx-runtime";
 import { createContext as f, useReducer as p, useEffect as m, useContext as y } from "react";
-import { Api as s } from "../api/api.js";
+import { Api as a } from "../api/api.js";
 const r = class r {
   static set initialState(t) {
     if (r._initialState)
@@ -13,7 +13,7 @@ const r = class r {
       const e = {};
       for (const n in r._initialState)
         e[`update_${n}`] = n;
-      r._reducer = (n, a) => a.type in e ? { ...n, [e[a.type]]: a.payload } : n;
+      r._reducer = (n, s) => s.type in e ? { ...n, [e[s.type]]: s.payload } : n;
     }
   }
   static get initialState() {
@@ -35,16 +35,16 @@ const u = f(void 0), P = ({ children: i }) => {
     o.initialState
   );
   return m(() => {
-    function n(a) {
+    function n(s) {
       e({
-        type: `update_${a.key}`,
-        payload: a.value
+        type: `update_${s.key}`,
+        payload: s.value
       });
     }
-    return s.stateEvents.addEventListener("UPDATE", n), () => {
-      s.stateEvents.removeEventListener("UPDATE", n);
+    return a.stateEvents.addEventListener("UPDATE", n), () => {
+      a.stateEvents.removeEventListener("UPDATE", n);
     };
-  }, []), /* @__PURE__ */ E(u.Provider, { value: { state: t, dispatch: e }, children: i });
+  }, []), /* @__PURE__ */ S(u.Provider, { value: { state: t, dispatch: e }, children: i });
 }, g = () => {
   const i = y(u);
   if (!i)
@@ -52,10 +52,10 @@ const u = f(void 0), P = ({ children: i }) => {
       "useFeatureState must be used within a FeatureStateProvider."
     );
   const { state: t } = i;
-  return { getStateItem: (d) => t[d], setStateItem: (d, S) => {
-    s.stateEvents.send_event({ id: "SET", data: { key: d, value: S } });
-  }, saveState: () => {
-    s.stateEvents.send_event({ id: "SAVE" });
+  return { getItem: (d) => t[d], setItem: (d, v) => {
+    a.stateEvents.send_event({ id: "SET", data: { key: d, value: v } });
+  }, save: () => {
+    a.stateEvents.send_event({ id: "SAVE" });
   } };
 };
 export {

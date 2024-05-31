@@ -1,9 +1,9 @@
 import { jsx as c } from "react/jsx-runtime";
 import d from "react";
-import w from "react-dom";
-import R from "./ui/components/ErrorFrame/index.js";
+import g from "react-dom";
+import w from "./ui/components/ErrorFrame/index.js";
 import { Api as l } from "./api/api.js";
-var i = {}, n = w;
+var i = {}, n = g;
 if (process.env.NODE_ENV === "production")
   i.createRoot = n.createRoot, i.hydrateRoot = n.hydrateRoot;
 else {
@@ -24,7 +24,7 @@ else {
     }
   };
 }
-function g() {
+function R() {
   const a = new URLSearchParams(window.location.search);
   return {
     featureName: a.get("feature"),
@@ -32,7 +32,7 @@ function g() {
   };
 }
 function _(a) {
-  const t = g(), s = (r) => /* @__PURE__ */ c(R, { message: r });
+  const t = R(), s = (r) => /* @__PURE__ */ c(w, { message: r });
   async function m(r) {
     const e = t.featureName;
     if (!e)
@@ -56,8 +56,14 @@ function _(a) {
   }
   async function y(r) {
     await l.init(t.featureName);
-    const e = await l.featureState();
-    f(r(t.initialRoute, e));
+    const e = await l.getInitialState();
+    f(
+      r(
+        t.featureName,
+        t.initialRoute,
+        e
+      )
+    );
   }
   async function E(r) {
     try {

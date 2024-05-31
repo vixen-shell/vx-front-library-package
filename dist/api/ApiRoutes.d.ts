@@ -1,16 +1,18 @@
 export declare class ApiRoutes {
-    private _featureName;
-    constructor(featureName: string);
-    static readonly PING: string;
-    readonly LOGS: string;
-    readonly LOG: string;
-    readonly FEATURE_NAME: string;
-    get FEATURE_START(): string;
-    get FEATURE_STOP(): string;
-    get FEATURE_STATE(): string;
-    get FEATURE_STATE_SOCKET(): string;
-    get FRAME_IDS(): string;
-    FRAME_TOGGLE(frameId: string): string;
-    FRAME_OPEN(frameId: string): string;
-    FRAME_CLOSE(frameId: string): string;
+    static readonly ping: string;
+    static readonly shutdown: string;
+    static readonly features_names: string;
+    static feature_start(featureName: string): string;
+    static feature_stop(featureName: string): string;
+    static feature_state(featureName: string): string;
+    static feature_state_socket(featureName: string): string;
+    static feature_action(featureName: string): string;
+    static feature_data(featureName: string): string;
+    static feature_file(featureName: string): string;
+    static feature_data_streamer(featureName: string): string;
+    static feature_socket(featureName: string, socketName: string): string;
+    static frames_ids(featureName: string): string;
+    static frame_toggle(featureName: string, frameId: string): string;
+    static frame_open(featureName: string, frameId: string): string;
+    static frame_close(featureName: string, frameId: string): string;
 }

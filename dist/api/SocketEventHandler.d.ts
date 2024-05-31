@@ -5,10 +5,14 @@ export type SocketEvent = {
 };
 type SocketEventListener = (data: SocketEventData) => void;
 export declare class SocketEventHandler {
-    private _websocket;
+    private _uri;
+    private _socket;
     private _listeners;
-    constructor(socketRoute: string);
-    private _handleInputEvents;
+    private _eventQueue;
+    constructor(uri: string);
+    private _afterConnection;
+    connect(): void;
+    disconnect(): void;
     addEventListener(eventId: string, listener: SocketEventListener): void;
     removeEventListener(eventId: string, listener: SocketEventListener): void;
     send_event(event: SocketEvent): void;

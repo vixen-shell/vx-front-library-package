@@ -1,36 +1,94 @@
 var f = Object.defineProperty;
-var l = (e, t, i) => t in e ? f(e, t, { enumerable: !0, configurable: !0, writable: !0, value: i }) : e[t] = i;
-var n = (e, t, i) => (l(e, typeof t != "symbol" ? t + "" : t, i), i);
-import { jsx as m } from "react/jsx-runtime";
-import { Routes as c, useRouter as R, RouterLink as p } from "../router/router.js";
-import { GlobalState as S, useGlobalState as d } from "../state/state.js";
-import w from "./FeatureRender.js";
-function o(e, t) {
-  if (!a.isInit)
-    throw new Error(`Cannot use '${e}' before feature initialization`);
-  return t;
+var c = (i, e, t) => e in i ? f(i, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : i[e] = t;
+var o = (i, e, t) => (c(i, typeof e != "symbol" ? e + "" : e, t), t);
+import { jsx as l } from "react/jsx-runtime";
+import { Routes as p, RouterLink as S, useRouter as F } from "../router/router.js";
+import { GlobalState as N, useGlobalState as g } from "../state/state.js";
+import { useFeatureAction as I } from "../api/hooks/action.js";
+import { useFeatureData as k } from "../api/hooks/data.js";
+import { useFeatureDataStreamer as D } from "../api/hooks/dataStreamer.js";
+import { useImageFiles as R } from "../api/hooks/files.js";
+import { useFeatureSocket as d } from "../api/hooks/socket.js";
+import { useFeatureFrames as w } from "../api/hooks/frames.js";
+import { Api as A } from "../api/api.js";
+import b from "./FeatureRender.js";
+function a(i, e) {
+  if (!n.isInit)
+    throw new Error(`Cannot use '${i}' before feature initialization`);
+  return e;
 }
 const r = class r {
-  static init(t) {
+  static init(e) {
     if (r.isInit)
       throw new Error("Feature is already initialized");
-    c.define(t);
-    const i = (s, u) => (S.initialState = u, /* @__PURE__ */ m(w, { initialRoute: s }));
-    return r.isInit = !0, i;
+    return p.define(e), (u, m, s) => (r.isInit = !0, r.featureName = u, N.initialState = s, /* @__PURE__ */ l(b, { initialRoute: m }));
+  }
+  static get names() {
+    return a("feature names", A.featureNames);
   }
   static get Link() {
-    return o("Link", p);
+    return a("Link", S);
   }
 };
-n(r, "isInit", !1), n(r, "Use", {
+o(r, "isInit", !1), o(r, "featureName"), o(r, "Use", {
   get Router() {
-    return o("Router", R);
+    return a("Router", F);
   },
   get State() {
-    return o("State", d);
+    return a("State", g);
+  },
+  Frames(e = r.featureName) {
+    return a("Frames", w(e));
+  },
+  Action({
+    featureName: e = r.featureName,
+    actionHandler: t
+  }) {
+    return a("Action", I(e, t));
+  },
+  Data({
+    featureName: e = r.featureName,
+    dataHandlers: t
+  }) {
+    return a("Data", k(e, t));
+  },
+  DataStreamer({
+    featureName: e = r.featureName,
+    dataHandlers: t,
+    interval: u = 1,
+    auto: m = !0
+  }) {
+    return a(
+      "DataStreamer",
+      D(
+        e,
+        t,
+        u,
+        m
+      )
+    );
+  },
+  ImageFiles({
+    featureName: e = r.featureName,
+    fileHandlers: t
+  }) {
+    return a(
+      "ImageFile",
+      R(e, t)
+    );
+  },
+  Socket({
+    featureName: e = r.featureName,
+    socketName: t,
+    auto: u = !0
+  }) {
+    return a(
+      "Socket",
+      d(e, t, u)
+    );
   }
 });
-let a = r;
+let n = r;
 export {
-  a as Feature
+  n as Feature
 };

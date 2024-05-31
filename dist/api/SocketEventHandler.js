@@ -1,31 +1,60 @@
 var r = Object.defineProperty;
-var h = (t, s, e) => s in t ? r(t, s, { enumerable: !0, configurable: !0, writable: !0, value: e }) : t[s] = e;
-var n = (t, s, e) => (h(t, typeof s != "symbol" ? s + "" : s, e), e);
+var c = (i, e, t) => e in i ? r(i, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : i[e] = t;
+var n = (i, e, t) => (c(i, typeof e != "symbol" ? e + "" : e, t), t);
 class _ {
-  constructor(s) {
-    n(this, "_websocket");
+  constructor(e) {
+    n(this, "_uri");
+    n(this, "_socket");
     n(this, "_listeners", {});
-    this._websocket = new WebSocket(s), this._websocket.onmessage = (e) => {
-      const i = JSON.parse(e.data);
-      this._handleInputEvents(i);
-    };
+    n(this, "_eventQueue", []);
+    this._uri = e;
   }
-  _handleInputEvents(s) {
-    const e = this._listeners[s.id];
-    e && e.forEach((i) => {
-      i(s.data || {});
+  _afterConnection(e) {
+    (async () => {
+      if (this._socket) {
+        let t = !0, s = !0;
+        for (; t; )
+          this._socket.readyState === WebSocket.OPEN && (t = !1), this._socket.readyState === WebSocket.CLOSED && (t = !1, s = !1), await new Promise((o) => setTimeout(o, 100));
+        s && e();
+      }
+    })();
+  }
+  connect() {
+    this._socket ? console.error(
+      `Socket event handler (${this._uri}): Already connected`
+    ) : (this._socket = new WebSocket(this._uri), this._socket.addEventListener("open", async () => {
+      this._eventQueue.length > 0 && this._afterConnection(() => {
+        for (; this._eventQueue.length > 0; )
+          this._socket.send(
+            JSON.stringify(this._eventQueue.shift())
+          );
+      });
+    }), this._socket.onmessage = (e) => {
+      const t = JSON.parse(e.data), s = this._listeners[t.id];
+      s && s.forEach((o) => {
+        o(t.data || {});
+      });
     });
   }
-  addEventListener(s, e) {
-    this._listeners[s] || (this._listeners[s] = []), this._listeners[s].push(e);
+  disconnect() {
+    if (this._socket) {
+      const e = this._socket;
+      this._afterConnection(() => {
+        e.close();
+      }), this._socket = void 0;
+    } else
+      console.error(`Socket event handler (${this._uri}): Not connected`);
   }
-  removeEventListener(s, e) {
-    this._listeners[s] && (this._listeners[s] = this._listeners[s].filter(
-      (i) => i !== e
-    ), this._listeners[s].length === 0 && delete this._listeners[s]);
+  addEventListener(e, t) {
+    this._listeners[e] || (this._listeners[e] = []), this._listeners[e].push(t);
   }
-  send_event(s) {
-    this._websocket.send(JSON.stringify(s));
+  removeEventListener(e, t) {
+    this._listeners[e] && (this._listeners[e] = this._listeners[e].filter(
+      (s) => s !== t
+    ), this._listeners[e].length === 0 && delete this._listeners[e]);
+  }
+  send_event(e) {
+    this._socket && (this._socket.readyState == WebSocket.OPEN ? this._socket.send(JSON.stringify(e)) : this._eventQueue.push(e));
   }
 }
 export {

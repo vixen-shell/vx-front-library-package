@@ -17,8 +17,8 @@ export declare const GlobalStateProvider: React.FC<{
     children: React.ReactNode;
 }>;
 export declare const useGlobalState: () => {
-    getStateItem: (key: string) => any;
-    setStateItem: (key: string, value: unknown) => void;
-    saveState: () => void;
+    getItem: (key: string) => any;
+    setItem: (key: string, value: unknown) => void;
+    save: () => void;
 };
 export {};

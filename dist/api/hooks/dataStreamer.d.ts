@@ -1,0 +1,9 @@
+export interface HandlerInfo {
+    name: string;
+    args?: any[];
+}
+export declare const useFeatureDataStreamer: (featureName: string, dataHandlers: HandlerInfo[], interval: number, auto: boolean) => {
+    data: Record<string, any> | undefined;
+    start: () => void;
+    stop: () => void;
+};
