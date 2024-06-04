@@ -2,23 +2,23 @@ import { jsx as c } from "react/jsx-runtime";
 import d from "react";
 import g from "react-dom";
 import w from "./ui/components/ErrorFrame/index.js";
-import { Api as l } from "./api/api.js";
+import { Api as m } from "./api/api.js";
 var i = {}, n = g;
 if (process.env.NODE_ENV === "production")
   i.createRoot = n.createRoot, i.hydrateRoot = n.hydrateRoot;
 else {
   var u = n.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-  i.createRoot = function(a, t) {
+  i.createRoot = function(a, e) {
     u.usingClientEntryPoint = !0;
     try {
-      return n.createRoot(a, t);
+      return n.createRoot(a, e);
     } finally {
       u.usingClientEntryPoint = !1;
     }
-  }, i.hydrateRoot = function(a, t, s) {
+  }, i.hydrateRoot = function(a, e, s) {
     u.usingClientEntryPoint = !0;
     try {
-      return n.hydrateRoot(a, t, s);
+      return n.hydrateRoot(a, e, s);
     } finally {
       u.usingClientEntryPoint = !1;
     }
@@ -32,45 +32,43 @@ function R() {
   };
 }
 function _(a) {
-  const t = R(), s = (r) => /* @__PURE__ */ c(w, { message: r });
-  async function m(r) {
-    const e = t.featureName;
-    if (!e)
+  const e = R(), s = (r) => /* @__PURE__ */ c(w, { message: r });
+  async function l(r) {
+    const t = e.featureName;
+    if (!t)
       throw new Error("Missing 'feature' parameter");
     try {
-      const o = (await r(e)).default;
+      const o = (await r(t)).default;
       if (!o)
         throw new Error(
-          `Bad initialization of feature '${t.featureName}'`
+          `Bad initialization of feature '${e.featureName}'`
         );
       return o;
     } catch (o) {
-      throw o.message.startsWith("Unknown variable dynamic import") ? new Error(`Feature '${t.featureName}' not found`) : new Error(o.message);
+      throw o.message.startsWith("Unknown variable dynamic import") ? new Error(`Feature '${e.featureName}' not found`) : new Error(o.message);
     }
   }
   function f(r) {
-    const e = () => r;
+    const t = () => r;
     i.createRoot(a).render(
-      /* @__PURE__ */ c(d.StrictMode, { children: /* @__PURE__ */ c(e, {}) })
+      /* @__PURE__ */ c(d.StrictMode, { children: /* @__PURE__ */ c(t, {}) })
     );
   }
   async function y(r) {
-    await l.init(t.featureName);
-    const e = await l.getInitialState();
-    f(
+    await m.init(e.featureName), f(
       r(
-        t.featureName,
-        t.initialRoute,
-        e
+        e.featureName,
+        e.initialRoute,
+        await m.getInitialState()
       )
     );
   }
   async function E(r) {
     try {
-      const e = await m(r);
-      await y(e);
-    } catch (e) {
-      console.error(e), f(s(e.message));
+      const t = await l(r);
+      await y(t);
+    } catch (t) {
+      console.error(t), f(s(t.message));
     }
   }
   return { render: E };

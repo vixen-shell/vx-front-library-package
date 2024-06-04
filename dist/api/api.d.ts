@@ -1,4 +1,5 @@
 import { SocketEventHandler } from './SocketEventHandler';
+import { GlobalStateType } from '../state';
 export declare class Api {
     static featureNames: string[] | undefined;
     static currentFeatureName: string | undefined;
@@ -8,5 +9,5 @@ export declare class Api {
     static get isInit(): boolean;
     static ping(): Promise<Boolean>;
     static get stateEvents(): SocketEventHandler;
-    static getInitialState(): Promise<import("./SocketEventHandler").SocketEventData>;
+    static getInitialState(): Promise<GlobalStateType | null>;
 }

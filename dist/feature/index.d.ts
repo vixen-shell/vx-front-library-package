@@ -32,7 +32,7 @@ interface useSocketProps {
 export declare class Feature {
     static isInit: boolean;
     static featureName: string | undefined;
-    static init(routes: RouteItems): (featureName: string, initialRoute: string, initialState: GlobalStateType) => import("react/jsx-runtime").JSX.Element;
+    static init(routes: RouteItems): (featureName: string, initialRoute: string, initialState: GlobalStateType | null) => import("react/jsx-runtime").JSX.Element;
     static get names(): string[] | undefined;
     static get Link(): import("react").FC<{
         className?: string | undefined;

@@ -1,36 +1,36 @@
 var l = Object.defineProperty;
-var E = (i, t, e) => t in i ? l(i, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : i[t] = e;
-var c = (i, t, e) => (E(i, typeof t != "symbol" ? t + "" : t, e), e);
-import { jsx as S } from "react/jsx-runtime";
-import { createContext as f, useReducer as p, useEffect as m, useContext as y } from "react";
+var p = (r, t, e) => t in r ? l(r, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : r[t] = e;
+var c = (r, t, e) => (p(r, typeof t != "symbol" ? t + "" : t, e), e);
+import { jsx as E } from "react/jsx-runtime";
+import { createContext as f, useReducer as S, useEffect as m, useContext as y } from "react";
 import { Api as a } from "../api/api.js";
-const r = class r {
+const i = class i {
   static set initialState(t) {
-    if (r._initialState)
+    if (i._initialState)
       console.error("Initial state is already set.");
     else {
-      r._initialState = t;
+      i._initialState = t;
       const e = {};
-      for (const n in r._initialState)
+      for (const n in i._initialState)
         e[`update_${n}`] = n;
-      r._reducer = (n, s) => s.type in e ? { ...n, [e[s.type]]: s.payload } : n;
+      i._reducer = (n, s) => s.type in e ? { ...n, [e[s.type]]: s.payload } : n;
     }
   }
   static get initialState() {
-    if (r._initialState)
-      return r._initialState;
+    if (i._initialState)
+      return i._initialState;
     throw new Error("State is not defined.");
   }
   static get reducer() {
-    if (r._reducer)
-      return r._reducer;
+    if (i._reducer)
+      return i._reducer;
     throw new Error("State is not defined.");
   }
 };
-c(r, "_initialState"), c(r, "_reducer");
-let o = r;
-const u = f(void 0), P = ({ children: i }) => {
-  const [t, e] = p(
+c(i, "_initialState"), c(i, "_reducer");
+let o = i;
+const u = f(void 0), g = ({ children: r }) => {
+  const [t, e] = S(
     o.reducer,
     o.initialState
   );
@@ -44,14 +44,12 @@ const u = f(void 0), P = ({ children: i }) => {
     return a.stateEvents.addEventListener("UPDATE", n), () => {
       a.stateEvents.removeEventListener("UPDATE", n);
     };
-  }, []), /* @__PURE__ */ S(u.Provider, { value: { state: t, dispatch: e }, children: i });
-}, g = () => {
-  const i = y(u);
-  if (!i)
-    throw new Error(
-      "useFeatureState must be used within a FeatureStateProvider."
-    );
-  const { state: t } = i;
+  }, []), /* @__PURE__ */ E(u.Provider, { value: { state: t, dispatch: e }, children: r });
+}, A = () => {
+  const r = y(u);
+  if (!r)
+    throw new Error("The state provider is not available");
+  const { state: t } = r;
   return { getItem: (d) => t[d], setItem: (d, v) => {
     a.stateEvents.send_event({ id: "SET", data: { key: d, value: v } });
   }, save: () => {
@@ -60,6 +58,6 @@ const u = f(void 0), P = ({ children: i }) => {
 };
 export {
   o as GlobalState,
-  P as GlobalStateProvider,
-  g as useGlobalState
+  g as GlobalStateProvider,
+  A as useGlobalState
 };
