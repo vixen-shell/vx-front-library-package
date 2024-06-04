@@ -41,9 +41,13 @@ const t = class t {
     throw new Error("Api not initialized");
   }
   static async getInitialState() {
-    return (await o(
-      n.feature_state(t.currentFeatureName)
-    )).state;
+    try {
+      return (await o(
+        n.feature_state(t.currentFeatureName)
+      )).state;
+    } catch (e) {
+      return console.warn(e), {};
+    }
   }
 };
 s(t, "featureNames"), s(t, "currentFeatureName"), s(t, "_stateEvents"), s(t, "_isInit", !1);
