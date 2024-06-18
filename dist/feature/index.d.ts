@@ -63,10 +63,10 @@ export declare class Feature {
         };
         Data({ featureName, dataHandlers, }: useDataProps): {
             update: () => void;
-            data: Record<string, any> | undefined;
+            data: Record<string, any>;
         };
         DataStreamer({ featureName, dataHandlers, interval, auto, }: useDataStreamerProps): {
-            data: Record<string, any> | undefined;
+            data: Record<string, any>;
             start: () => void;
             stop: () => void;
         };

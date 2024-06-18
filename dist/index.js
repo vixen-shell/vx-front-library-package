@@ -1,8 +1,6 @@
-import { i as e } from "./index-U9wIAxLf.js";
-import { i as a } from "./index-CyWcRrcH.js";
-import { Feature as i } from "./feature/index.js";
+import { i as e } from "./index-CyWcRrcH.js";
+import { Feature as a } from "./feature/index.js";
 export {
-  i as Feature,
-  a as Root,
-  e as ui
+  a as Feature,
+  e as Root
 };

@@ -4,5 +4,5 @@ export interface HandlerInfo {
 }
 export declare const useFeatureData: (featureName: string, dataHandlers: HandlerInfo[]) => {
     update: () => () => void;
-    data: Record<string, any> | undefined;
+    data: Record<string, any>;
 };
