@@ -50,11 +50,7 @@ function _(a) {
   }
   function c(r) {
     const t = () => r;
-    i.createRoot(a).render(
-      // <React.StrictMode>
-      /* @__PURE__ */ f(t, {})
-      // </React.StrictMode>
-    );
+    i.createRoot(a).render(/* @__PURE__ */ f(t, {}));
   }
   async function y(r) {
     await m.init(e.featureName), c(
