@@ -1,7 +1,7 @@
-import { jsx as c } from "react/jsx-runtime";
-import d from "react";
+import { jsx as f } from "react/jsx-runtime";
 import g from "react-dom";
 import w from "./ui/components/ErrorFrame/index.js";
+import "react";
 import { Api as m } from "./api/api.js";
 var i = {}, n = g;
 if (process.env.NODE_ENV === "production")
@@ -32,7 +32,7 @@ function R() {
   };
 }
 function _(a) {
-  const e = R(), s = (r) => /* @__PURE__ */ c(w, { message: r });
+  const e = R(), s = (r) => /* @__PURE__ */ f(w, { message: r });
   async function l(r) {
     const t = e.featureName;
     if (!t)
@@ -48,14 +48,16 @@ function _(a) {
       throw o.message.startsWith("Unknown variable dynamic import") ? new Error(`Feature '${e.featureName}' not found`) : new Error(o.message);
     }
   }
-  function f(r) {
+  function c(r) {
     const t = () => r;
     i.createRoot(a).render(
-      /* @__PURE__ */ c(d.StrictMode, { children: /* @__PURE__ */ c(t, {}) })
+      // <React.StrictMode>
+      /* @__PURE__ */ f(t, {})
+      // </React.StrictMode>
     );
   }
   async function y(r) {
-    await m.init(e.featureName), f(
+    await m.init(e.featureName), c(
       r(
         e.featureName,
         e.initialRoute,
@@ -68,7 +70,7 @@ function _(a) {
       const t = await l(r);
       await y(t);
     } catch (t) {
-      console.error(t), f(s(t.message));
+      console.error(t), c(s(t.message));
     }
   }
   return { render: E };

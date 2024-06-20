@@ -1,7 +1,7 @@
 import "react/jsx-runtime";
-import "react";
-import { c as e } from "../index-CyWcRrcH.js";
+import { c as e } from "../index-ChFv88qD.js";
 import "../ui/components/ErrorFrame/index.js";
+import "react";
 import "../api/api.js";
 export {
   e as create
