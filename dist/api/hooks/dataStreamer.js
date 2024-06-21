@@ -1,11 +1,13 @@
-import { useState as m, useRef as E, useEffect as f, useCallback as R } from "react";
-import { ApiRoutes as p } from "../ApiRoutes.js";
-import { SocketEventHandler as v } from "../SocketEventHandler.js";
-const k = (d, n, s, t) => {
-  const [i, o] = m({}), e = E(
-    new v(p.feature_data_streamer(d))
+import { useState as E, useRef as f, useEffect as R, useCallback as p } from "react";
+import { ApiRoutes as v } from "../ApiRoutes.js";
+import { SocketEventHandler as D } from "../SocketEventHandler.js";
+const l = (d, i, n, s, t) => {
+  const [m, o] = E({}), e = f(
+    new D(
+      v.feature_data_streamer(d, i)
+    )
   );
-  f(() => {
+  R(() => {
     const a = (r) => {
       o(r);
     }, u = (r) => {
@@ -15,14 +17,14 @@ const k = (d, n, s, t) => {
       e.current.removeEventListener("UPDATE", a), e.current.removeEventListener("ERROR", u), t && e.current.disconnect();
     };
   }, [t]);
-  const c = R(() => {
+  const c = p(() => {
     e.current.connect(), e.current.send_event({
       id: "INIT",
       data: { data_handlers: n, interval: s }
     });
   }, [n, s]);
-  return { data: i, start: c, stop: e.current.disconnect };
+  return { data: m, start: c, stop: e.current.disconnect };
 };
 export {
-  k as useFeatureDataStreamer
+  l as useFeatureDataStreamer
 };

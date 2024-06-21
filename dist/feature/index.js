@@ -1,8 +1,8 @@
 var f = Object.defineProperty;
 var c = (i, e, t) => e in i ? f(i, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : i[e] = t;
-var u = (i, e, t) => (c(i, typeof e != "symbol" ? e + "" : e, t), t);
+var o = (i, e, t) => (c(i, typeof e != "symbol" ? e + "" : e, t), t);
 import { jsx as p } from "react/jsx-runtime";
-import { Routes as l, RouterLink as F, useRouter as N } from "../router/router.js";
+import { Routes as l, RouterLink as N, useRouter as F } from "../router/router.js";
 import { GlobalState as S, useGlobalState as g } from "../state/state.js";
 import { useFeatureAction as I } from "../api/hooks/action.js";
 import { useFeatureData as k } from "../api/hooks/data.js";
@@ -21,7 +21,7 @@ const r = class r {
   static init(e) {
     if (r.isInit)
       throw new Error("Feature is already initialized");
-    return l.define(e), (o, m, n) => (r.isInit = !0, r.featureName = o, n && (S.initialState = n), /* @__PURE__ */ p(
+    return l.define(e), (u, m, n) => (r.isInit = !0, r.featureName = u, n && (S.initialState = n), /* @__PURE__ */ p(
       b,
       {
         initialRoute: m,
@@ -33,12 +33,12 @@ const r = class r {
     return a("feature names", A.featureNames);
   }
   static get Link() {
-    return a("Link", F);
+    return a("Link", N);
   }
 };
-u(r, "isInit", !1), u(r, "featureName"), u(r, "Use", {
+o(r, "isInit", !1), o(r, "featureName"), o(r, "Use", {
   get Router() {
-    return a("Router", N);
+    return a("Router", F);
   },
   get State() {
     return a("State", g);
@@ -61,15 +61,16 @@ u(r, "isInit", !1), u(r, "featureName"), u(r, "Use", {
   DataStreamer({
     featureName: e = r.featureName,
     dataHandlers: t,
-    interval: o = 1,
+    interval: u = 1,
     auto: m = !0
   }) {
     return a(
       "DataStreamer",
       D(
+        r.featureName,
         e,
         t,
-        o,
+        u,
         m
       )
     );
@@ -86,11 +87,16 @@ u(r, "isInit", !1), u(r, "featureName"), u(r, "Use", {
   Socket({
     featureName: e = r.featureName,
     socketName: t,
-    auto: o = !0
+    auto: u = !0
   }) {
     return a(
       "Socket",
-      d(e, t, o)
+      d(
+        r.featureName,
+        e,
+        t,
+        u
+      )
     );
   }
 });

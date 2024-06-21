@@ -1,66 +1,72 @@
 var c = Object.defineProperty;
-var n = (r, t, a) => t in r ? c(r, t, { enumerable: !0, configurable: !0, writable: !0, value: a }) : r[t] = a;
-var s = (r, t, a) => (n(r, typeof t != "symbol" ? t + "" : t, a), a);
-function e(r, t) {
-  const [a, f] = ["localhost", "6481"];
-  return `${r}://${a}:${f}${t}`;
+var n = (r, t, e) => t in r ? c(r, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : r[t] = e;
+var s = (r, t, e) => (n(r, typeof t != "symbol" ? t + "" : t, e), e);
+function a(r, t) {
+  const [e, u] = ["localhost", "6481"];
+  return `${r}://${e}:${u}${t}`;
 }
-class u {
+class f {
   // ----------------------------------- - - -
   // ENDPOINTS :: FEATURE
   static feature_start(t) {
-    return e("http", `/feature/${t}/start`);
+    return a("http", `/feature/${t}/start`);
   }
   static feature_stop(t) {
-    return e("http", `/feature/${t}/stop`);
+    return a("http", `/feature/${t}/stop`);
   }
   static feature_state(t) {
-    return e("http", `/feature/${t}/state`);
+    return a("http", `/feature/${t}/state`);
   }
   // WEBSOCKETS :: FEATURE STATE
   static feature_state_socket(t) {
-    return e("ws", `/feature/${t}/state`);
+    return a("ws", `/feature/${t}/state`);
   }
   // ----------------------------------- - - -
   // ENDPOINTS :: FEATURE CONTENTS
   static feature_action(t) {
-    return e("http", `/feature/${t}/action`);
+    return a("http", `/feature/${t}/action`);
   }
   static feature_data(t) {
-    return e("http", `/feature/${t}/data`);
+    return a("http", `/feature/${t}/data`);
   }
   static feature_file(t) {
-    return e("http", `/feature/${t}/file`);
+    return a("http", `/feature/${t}/file`);
   }
   // WEBSOCKETS :: FEATURE CONTENTS
-  static feature_data_streamer(t) {
-    return e("ws", `/feature/${t}/data_streamer`);
+  static feature_data_streamer(t, e) {
+    return a(
+      "ws",
+      `/feature/${t}/data_streamer/${e}`
+    );
   }
-  static feature_socket(t, a) {
-    return e("ws", `/feature/${t}/sockets/${a}`);
+  static feature_socket(t, e, u) {
+    return a(
+      "ws",
+      `/feature/${t}/sockets/${e}/${u}`
+    );
   }
   // ----------------------------------- - - -
   // ENDPOINTS :: FRAMES
   static frames_ids(t) {
-    return e("http", `/frames/${t}/ids`);
+    return a("http", `/frames/${t}/ids`);
   }
   // ----------------------------------- - - -
   // ENDPOINTS :: FRAME
-  static frame_toggle(t, a) {
-    return e("http", `/frame/${t}/toggle/${a}`);
+  static frame_toggle(t, e) {
+    return a("http", `/frame/${t}/toggle/${e}`);
   }
-  static frame_open(t, a) {
-    return e("http", `/frame/${t}/open/${a}`);
+  static frame_open(t, e) {
+    return a("http", `/frame/${t}/open/${e}`);
   }
-  static frame_close(t, a) {
-    return e("http", `/frame/${t}/close/${a}`);
+  static frame_close(t, e) {
+    return a("http", `/frame/${t}/close/${e}`);
   }
 }
 // ----------------------------------- - - -
 // ENDPOINTS :: BASIC
-s(u, "ping", e("http", "/ping")), s(u, "shutdown", e("http", "/shutdown")), // ----------------------------------- - - -
+s(f, "ping", a("http", "/ping")), s(f, "shutdown", a("http", "/shutdown")), // ----------------------------------- - - -
 // ENDPOINTS :: FEATURES
-s(u, "features_names", e("http", "/features/names"));
+s(f, "features_names", a("http", "/features/names"));
 export {
-  u as ApiRoutes
+  f as ApiRoutes
 };

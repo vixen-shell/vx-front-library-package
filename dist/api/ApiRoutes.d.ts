@@ -9,8 +9,8 @@ export declare class ApiRoutes {
     static feature_action(featureName: string): string;
     static feature_data(featureName: string): string;
     static feature_file(featureName: string): string;
-    static feature_data_streamer(featureName: string): string;
-    static feature_socket(featureName: string, socketName: string): string;
+    static feature_data_streamer(featureName: string, targetFeatureName: string): string;
+    static feature_socket(featureName: string, targetFeatureName: string, socketName: string): string;
     static frames_ids(featureName: string): string;
     static frame_toggle(featureName: string, frameId: string): string;
     static frame_open(featureName: string, frameId: string): string;
