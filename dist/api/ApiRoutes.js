@@ -17,6 +17,12 @@ class f {
   static feature_state(t) {
     return a("http", `/feature/${t}/state`);
   }
+  static feature_get_param(t, e) {
+    return a("http", `/feature/${t}/get_param/${e}`);
+  }
+  static feature_set_param(t, e) {
+    return a("http", `/feature/${t}/set_param/${e}`);
+  }
   // WEBSOCKETS :: FEATURE STATE
   static feature_state_socket(t) {
     return a("ws", `/feature/${t}/state`);

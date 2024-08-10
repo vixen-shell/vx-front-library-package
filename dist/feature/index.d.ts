@@ -49,6 +49,10 @@ export declare class Feature {
             setItem: (key: string, value: unknown) => void;
             save: () => void;
         };
+        Params(paramPaths: string[]): {
+            params: Record<string, any>;
+            setParam: (paramPath: string, value: any) => () => void;
+        };
         Frames(featureName?: string): {
             ids: string[];
             actives: string[];

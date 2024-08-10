@@ -1,6 +1,6 @@
 var f = Object.defineProperty;
-var c = (i, e, t) => e in i ? f(i, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : i[e] = t;
-var o = (i, e, t) => (c(i, typeof e != "symbol" ? e + "" : e, t), t);
+var c = (u, e, r) => e in u ? f(u, e, { enumerable: !0, configurable: !0, writable: !0, value: r }) : u[e] = r;
+var m = (u, e, r) => (c(u, typeof e != "symbol" ? e + "" : e, r), r);
 import { jsx as p } from "react/jsx-runtime";
 import { Routes as l, RouterLink as N, useRouter as F } from "../router/router.js";
 import { GlobalState as S, useGlobalState as g } from "../state/state.js";
@@ -10,97 +10,101 @@ import { useFeatureDataStreamer as D } from "../api/hooks/dataStreamer.js";
 import { useImageFiles as R } from "../api/hooks/files.js";
 import { useFeatureSocket as d } from "../api/hooks/socket.js";
 import { useFeatureFrames as w } from "../api/hooks/frames.js";
-import { Api as A } from "../api/api.js";
-import b from "./FeatureRender.js";
-function a(i, e) {
-  if (!s.isInit)
-    throw new Error(`Cannot use '${i}' before feature initialization`);
+import { useParams as A } from "../api/hooks/params.js";
+import { Api as b } from "../api/api.js";
+import L from "./FeatureRender.js";
+function a(u, e) {
+  if (!n.isInit)
+    throw new Error(`Cannot use '${u}' before feature initialization`);
   return e;
 }
-const r = class r {
+const t = class t {
   static init(e) {
-    if (r.isInit)
+    if (t.isInit)
       throw new Error("Feature is already initialized");
-    return l.define(e), (u, m, n) => (r.isInit = !0, r.featureName = u, n && (S.initialState = n), /* @__PURE__ */ p(
-      b,
+    return l.define(e), (i, o, s) => (t.isInit = !0, t.featureName = i, s && (S.initialState = s), /* @__PURE__ */ p(
+      L,
       {
-        initialRoute: m,
-        state: !!n
+        initialRoute: o,
+        state: !!s
       }
     ));
   }
   static get names() {
-    return a("feature names", A.featureNames);
+    return a("feature names", b.featureNames);
   }
   static get Link() {
     return a("Link", N);
   }
 };
-o(r, "isInit", !1), o(r, "featureName"), o(r, "Use", {
+m(t, "isInit", !1), m(t, "featureName"), m(t, "Use", {
   get Router() {
     return a("Router", F);
   },
   get State() {
     return a("State", g);
   },
-  Frames(e = r.featureName) {
+  Params(e) {
+    return a("Params", A(t.featureName, e));
+  },
+  Frames(e = t.featureName) {
     return a("Frames", w(e));
   },
   Action({
-    featureName: e = r.featureName,
-    actionHandler: t
+    featureName: e = t.featureName,
+    actionHandler: r
   }) {
-    return a("Action", I(e, t));
+    return a("Action", I(e, r));
   },
   Data({
-    featureName: e = r.featureName,
-    dataHandlers: t
+    featureName: e = t.featureName,
+    dataHandlers: r
   }) {
-    return a("Data", k(e, t));
+    return a("Data", k(e, r));
   },
   DataStreamer({
-    featureName: e = r.featureName,
-    dataHandlers: t,
-    interval: u = 1,
-    auto: m = !0
+    featureName: e = t.featureName,
+    dataHandlers: r,
+    interval: i = 1,
+    auto: o = !0
   }) {
     return a(
       "DataStreamer",
       D(
-        r.featureName,
+        t.featureName,
         e,
-        t,
-        u,
-        m
+        r,
+        i,
+        o
       )
     );
   },
   ImageFiles({
-    featureName: e = r.featureName,
-    fileHandlers: t
+    featureName: e = t.featureName,
+    fileHandlers: r
   }) {
     return a(
       "ImageFile",
-      R(e, t)
+      R(e, r)
     );
   },
   Socket({
-    featureName: e = r.featureName,
-    socketName: t,
-    auto: u = !0
+    featureName: e = t.featureName,
+    socketName: r,
+    auto: i = !0
   }) {
     return a(
       "Socket",
       d(
-        r.featureName,
+        t.featureName,
         e,
-        t,
-        u
+        r,
+        i
       )
     );
   }
 });
-let s = r;
+let n = t;
 export {
-  s as Feature
+  n as Feature
 };

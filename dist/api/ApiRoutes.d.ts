@@ -5,6 +5,8 @@ export declare class ApiRoutes {
     static feature_start(featureName: string): string;
     static feature_stop(featureName: string): string;
     static feature_state(featureName: string): string;
+    static feature_get_param(featureName: string, paramPath: string): string;
+    static feature_set_param(featureName: string, paramPath: string): string;
     static feature_state_socket(featureName: string): string;
     static feature_action(featureName: string): string;
     static feature_data(featureName: string): string;

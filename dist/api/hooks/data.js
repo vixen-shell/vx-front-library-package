@@ -1,33 +1,37 @@
-import { useState as i, useCallback as p } from "react";
-import { ApiRoutes as u } from "../ApiRoutes.js";
-const d = (o, r) => {
-  const [e, s] = i({});
-  return { update: p(() => {
-    const a = new AbortController(), { signal: n } = a;
+import { useState as p, useEffect as u, useCallback as f } from "react";
+import { ApiRoutes as l } from "../ApiRoutes.js";
+const m = (o, e) => {
+  const [r, s] = p({});
+  u(() => {
+    n();
+  }, []);
+  const n = f(() => {
+    const a = new AbortController(), { signal: c } = a;
     return (async () => {
       try {
         const t = await fetch(
-          u.feature_data(o),
+          l.feature_data(o),
           {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
             },
-            body: JSON.stringify(r),
-            signal: n
+            body: JSON.stringify(e),
+            signal: c
           }
         );
         if (!t.ok) {
-          const c = await t.json();
-          throw new Error(c.message);
+          const i = await t.json();
+          throw new Error(i.message);
         }
         s(await t.json());
       } catch (t) {
-        e && s({}), console.error(t);
+        r && s({}), console.error(t);
       }
     })(), () => a.abort();
-  }, [o, r]), data: e };
+  }, [o, e]);
+  return { update: n, data: r };
 };
 export {
-  d as useFeatureData
+  m as useFeatureData
 };
