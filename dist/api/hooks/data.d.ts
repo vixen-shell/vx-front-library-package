@@ -1,8 +1,9 @@
-export interface HandlerInfo {
+interface HandlerInfo {
     name: string;
     args?: any[];
 }
-export declare const useFeatureData: (featureName: string, dataHandlers: HandlerInfo[]) => {
+export declare const useData: (feature: string, handlers: HandlerInfo[]) => {
     update: () => () => void;
     data: Record<string, any>;
 };
+export {};

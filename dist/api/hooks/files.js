@@ -1,6 +1,6 @@
-import { useState as p, useCallback as m, useEffect as g } from "react";
-import { ApiRoutes as f } from "../ApiRoutes.js";
-const l = (r) => [
+import { useState as p, useCallback as l, useEffect as f } from "react";
+import { ApiRoutes as m } from "../ApiRoutes.js";
+const g = (r) => [
   "image/jpeg",
   "image/png",
   "image/gif",
@@ -10,25 +10,22 @@ const l = (r) => [
   "image/bmp",
   "image/tiff"
 ].includes(r), y = (r, s) => {
-  const [a, n] = p({}), i = m(
+  const [n, i] = p({}), a = l(
     async (e) => {
       try {
-        const t = await fetch(
-          f.feature_file(r),
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(e)
-          }
-        );
+        const t = await fetch(m.feature_file(r), {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(e)
+        });
         if (!t.ok) {
           const c = await t.json();
           throw new Error(c.message || "Unhandled error");
         }
         const o = await t.blob();
-        if (!l(o.type))
+        if (!g(o.type))
           throw new Error("Unsupported file type");
         return URL.createObjectURL(o);
       } catch (t) {
@@ -37,17 +34,17 @@ const l = (r) => [
     },
     [r]
   );
-  return g(() => ((async () => {
+  return f(() => ((async () => {
     const e = {};
     Object.entries(s).forEach(async ([t, o]) => {
-      e[t] = await i(o);
-    }), n(e);
+      e[t] = await a(o);
+    }), i(e);
   })(), () => {
-    Object.values(a).forEach((e) => {
+    Object.values(n).forEach((e) => {
       e && URL.revokeObjectURL(e);
-    }), n({});
-  }), []), a;
+    }), i({});
+  }), []), n;
 };
 export {
-  y as useImageFiles
+  y as useFiles
 };

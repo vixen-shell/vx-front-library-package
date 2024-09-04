@@ -1,6 +1,7 @@
-import { GlobalState as e, GlobalStateProvider as l, useGlobalState as o } from "./state.js";
+import { GlobalState as e, GlobalStateProvider as a } from "./state.js";
+import { useGlobalState as r } from "./hook.js";
 export {
   e as GlobalState,
-  l as GlobalStateProvider,
-  o as useGlobalState
+  a as GlobalStateProvider,
+  r as useGlobalState
 };

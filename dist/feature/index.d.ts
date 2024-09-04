@@ -1,32 +1,31 @@
-/// <reference types="react" />
-import type { RouteItems } from '../router';
-import type { GlobalStateType } from '../state';
+import { RouteItems } from '../router';
+import { GlobalStateType } from '../state';
 import { SocketEventHandler } from '../api';
-export interface HandlerInfo {
+interface HandlerInfo {
     name: string;
     args?: any[];
 }
-interface useActionProps {
-    featureName?: string;
-    actionHandler: HandlerInfo;
+interface useTaskProps {
+    feature?: string;
+    handler: HandlerInfo;
 }
 interface useDataProps {
-    featureName?: string;
-    dataHandlers: HandlerInfo[];
+    feature?: string;
+    handlers: HandlerInfo[];
 }
-interface useDataStreamerProps {
-    featureName?: string;
-    dataHandlers: HandlerInfo[];
+interface useStreamProps {
+    feature?: string;
+    handlers: HandlerInfo[];
     interval?: number;
     auto?: boolean;
 }
-interface useImageFilesProps {
-    featureName?: string;
-    fileHandlers: Record<string, HandlerInfo>;
+interface useFilesProps {
+    feature?: string;
+    handlers: Record<string, HandlerInfo>;
 }
 interface useSocketProps {
-    featureName?: string;
-    socketName: string;
+    feature?: string;
+    name: string;
     auto?: boolean;
 }
 export declare class Feature {
@@ -34,48 +33,48 @@ export declare class Feature {
     static featureName: string | undefined;
     static init(routes: RouteItems): (featureName: string, initialRoute: string, initialState: GlobalStateType | null) => import("react/jsx-runtime").JSX.Element;
     static get names(): string[] | undefined;
-    static get Link(): import("react").FC<{
-        className?: string | undefined;
+    static get Link(): import('react').FC<{
+        className?: string;
         route: string;
-        children: import("react").ReactNode;
+        children: React.ReactNode;
     }>;
     static Use: {
         readonly Router: () => {
             route: string;
-            setRoute: import("react").Dispatch<import("react").SetStateAction<string>>;
+            setRoute: import('react').Dispatch<import('react').SetStateAction<string>>;
         };
         readonly State: () => {
             getItem: (key: string) => any;
             setItem: (key: string, value: unknown) => void;
             save: () => void;
         };
-        Params(paramPaths: string[]): {
+        Params(paths: string[]): {
             params: Record<string, any>;
             setParam: (paramPath: string, value: any) => () => void;
         };
-        Frames(featureName?: string): {
+        Frames(feature?: string): {
             ids: string[];
             actives: string[];
             toggle: (frameId: string) => () => void;
             open: (frameId: string) => () => void;
             close: (frameId: string) => () => void;
         };
-        Action({ featureName, actionHandler, }: useActionProps): {
+        Task({ feature, handler }: useTaskProps): {
             run: () => () => void;
             isRunning: boolean;
             onTerminate: (callback: (data: any, error: any) => void) => void;
         };
-        Data({ featureName, dataHandlers, }: useDataProps): {
+        Data({ feature, handlers }: useDataProps): {
             update: () => void;
             data: Record<string, any>;
         };
-        DataStreamer({ featureName, dataHandlers, interval, auto, }: useDataStreamerProps): {
+        Stream({ feature, handlers, interval, auto, }: useStreamProps): {
             data: Record<string, any>;
             start: () => void;
             stop: () => void;
         };
-        ImageFiles({ featureName, fileHandlers, }: useImageFilesProps): Record<string, string | undefined>;
-        Socket({ featureName, socketName, auto, }: useSocketProps): SocketEventHandler;
+        Files({ feature, handlers }: useFilesProps): Record<string, string | undefined>;
+        Socket({ feature, name, auto, }: useSocketProps): SocketEventHandler;
     };
 }
 export {};

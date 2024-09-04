@@ -1,13 +1,17 @@
 import { jsx as r } from "react/jsx-runtime";
-import { GlobalStateProvider as d } from "../state/state.js";
-import { RouterProvider as n, RouterRender as i } from "../router/router.js";
-const u = ({
-  initialRoute: o,
+import { GlobalStateProvider as i } from "../state/state.js";
+import "react";
+import "../api/ApiRoutes.js";
+import "../api/api.js";
+import { RouterRender as m } from "../router/index.js";
+import { RouterProvider as d } from "../router/router.js";
+const c = ({
+  initialRoute: e,
   state: t
 }) => {
-  const e = () => /* @__PURE__ */ r(n, { initialRoute: o, children: /* @__PURE__ */ r(i, {}) });
-  return t ? /* @__PURE__ */ r(d, { children: /* @__PURE__ */ r(e, {}) }) : /* @__PURE__ */ r(e, {});
+  const o = () => /* @__PURE__ */ r(d, { initialRoute: e, children: /* @__PURE__ */ r(m, {}) });
+  return t ? /* @__PURE__ */ r(i, { children: /* @__PURE__ */ r(o, {}) }) : /* @__PURE__ */ r(o, {});
 };
 export {
-  u as default
+  c as default
 };

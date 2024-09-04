@@ -4,32 +4,32 @@ const d = (a, f) => {
   const [c, w] = g({});
   h(() => {
     f.forEach((r) => {
-      p(r);
+      m(r);
     });
   }, []);
   const i = n((r, o) => {
-    w((e) => ({ ...e, [r]: o }));
-  }, []), p = n((r) => {
-    const o = new AbortController(), { signal: e } = o;
+    w((t) => ({ ...t, [r]: o }));
+  }, []), m = n((r) => {
+    const o = new AbortController(), { signal: t } = o;
     return (async () => {
       try {
-        const t = await fetch(
+        const e = await fetch(
           l.feature_get_param(a, r),
-          { signal: e }
+          { signal: t }
         );
-        if (!t.ok) {
-          const s = await t.json();
+        if (!e.ok) {
+          const s = await e.json();
           throw new Error(s.message);
         }
-        i(r, (await t.json())[r]);
-      } catch (t) {
-        console.error(t);
+        i(r, (await e.json())[r]);
+      } catch (e) {
+        console.error(e);
       }
     })(), () => o.abort();
-  }, []), m = n((r, o) => {
+  }, []), p = n((r, o) => {
     if (!(r in c))
       throw new Error("Parameter path not found");
-    const e = new AbortController(), { signal: t } = e;
+    const t = new AbortController(), { signal: e } = t;
     return (async () => {
       try {
         const s = await fetch(
@@ -40,7 +40,7 @@ const d = (a, f) => {
               "Content-Type": "application/json"
             },
             body: JSON.stringify({ value: o }),
-            signal: t
+            signal: e
           }
         );
         if (!s.ok) {
@@ -51,9 +51,9 @@ const d = (a, f) => {
       } catch (s) {
         console.error(s);
       }
-    })(), () => e.abort();
+    })(), () => t.abort();
   }, []);
-  return { params: c, setParam: m };
+  return { params: c, setParam: p };
 };
 export {
   d as useParams

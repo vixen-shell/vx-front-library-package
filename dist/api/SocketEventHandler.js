@@ -1,20 +1,13 @@
-var r = Object.defineProperty;
-var c = (i, e, t) => e in i ? r(i, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : i[e] = t;
-var n = (i, e, t) => (c(i, typeof e != "symbol" ? e + "" : e, t), t);
-class _ {
+class o {
   constructor(e) {
-    n(this, "_uri");
-    n(this, "_socket");
-    n(this, "_listeners", {});
-    n(this, "_eventQueue", []);
-    this._uri = e;
+    this._socket = void 0, this._listeners = {}, this._eventQueue = [], this._uri = e;
   }
   _afterConnection(e) {
     (async () => {
       if (this._socket) {
         let t = !0, s = !0;
         for (; t; )
-          this._socket.readyState === WebSocket.OPEN && (t = !1), this._socket.readyState === WebSocket.CLOSED && (t = !1, s = !1), await new Promise((o) => setTimeout(o, 100));
+          this._socket.readyState === WebSocket.OPEN && (t = !1), this._socket.readyState === WebSocket.CLOSED && (t = !1, s = !1), await new Promise((i) => setTimeout(i, 100));
         s && e();
       }
     })();
@@ -31,8 +24,8 @@ class _ {
       });
     }), this._socket.onmessage = (e) => {
       const t = JSON.parse(e.data), s = this._listeners[t.id];
-      s && s.forEach((o) => {
-        o(t.data || {});
+      s && s.forEach((i) => {
+        i(t.data || {});
       });
     });
   }
@@ -58,5 +51,5 @@ class _ {
   }
 }
 export {
-  _ as SocketEventHandler
+  o as SocketEventHandler
 };

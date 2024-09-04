@@ -1,51 +1,30 @@
-var a = Object.defineProperty;
-var d = (t, e, r) => e in t ? a(t, e, { enumerable: !0, configurable: !0, writable: !0, value: r }) : t[e] = r;
-var u = (t, e, r) => (d(t, typeof e != "symbol" ? e + "" : e, r), r);
-import { jsx as n } from "react/jsx-runtime";
-import l from "../ui/components/ErrorFrame/index.js";
-import { createContext as R, useState as f, useContext as x } from "react";
-const o = class o {
+import { jsx as i } from "react/jsx-runtime";
+import n from "../ui/components/ErrorFrame/index.js";
+import { createContext as a, useState as c } from "react";
+const t = class t {
   static define(e) {
-    o.items ? console.error("Route items are already set") : o.items = e;
+    t.items ? console.error("Route items are already set") : t.items = e;
   }
   static get(e) {
-    if (o.items && o.exists(e))
-      return o.items[e];
+    if (t.items && t.exists(e))
+      return t.items[e];
     {
       const r = e ? `Route item '${e}' is not defined` : "Missing 'route' parameter";
-      return console.error(r), /* @__PURE__ */ n(l, { message: r });
+      return console.error(r), /* @__PURE__ */ i(n, { message: r });
     }
   }
   static exists(e) {
-    return o.items && e in o.items;
+    return t.items && e in t.items;
   }
 };
-u(o, "items");
-let i = o;
-const c = R(void 0), w = ({ initialRoute: t, children: e }) => {
-  const [r, s] = f(t);
-  return /* @__PURE__ */ n(c.Provider, { value: { route: r, setRoute: s }, children: e });
-}, m = () => {
-  const t = x(c);
-  if (t)
-    return t;
-  throw new Error("useRouter must be used within a RouterProvider.");
-}, P = () => i.get(m().route), h = ({ className: t, route: e, children: r }) => {
-  const { setRoute: s } = m();
-  return /* @__PURE__ */ n(
-    "div",
-    {
-      className: `ui_link ${t}`,
-      style: { cursor: "pointer" },
-      onClick: () => s(e),
-      children: r
-    }
-  );
+t.items = void 0;
+let s = t;
+const u = a(void 0), x = ({ initialRoute: o, children: e }) => {
+  const [r, m] = c(o);
+  return /* @__PURE__ */ i(u.Provider, { value: { route: r, setRoute: m }, children: e });
 };
 export {
-  h as RouterLink,
-  w as RouterProvider,
-  P as RouterRender,
-  i as Routes,
-  m as useRouter
+  u as RouterContext,
+  x as RouterProvider,
+  s as Routes
 };

@@ -1,12 +1,12 @@
-import { useState as p, useRef as m, useCallback as c } from "react";
+import { useState as p, useRef as m, useCallback as a } from "react";
 import { ApiRoutes as w } from "../ApiRoutes.js";
-const h = (e, o) => {
-  const [a, s] = p(!1), n = m(), i = c(() => {
+const R = (e, o) => {
+  const [c, s] = p(!1), r = m(), i = a(() => {
     s(!0);
     const t = new AbortController(), { signal: l } = t;
     return (async () => {
       try {
-        const r = await fetch(
+        const n = await fetch(
           w.feature_action(e),
           {
             method: "POST",
@@ -17,25 +17,25 @@ const h = (e, o) => {
             signal: l
           }
         );
-        if (!r.ok) {
-          const f = await r.json();
+        if (!n.ok) {
+          const f = await n.json();
           throw new Error(f.message);
         }
-        n.current && n.current(await r.json(), null);
-      } catch (r) {
-        console.error(r), n.current && n.current(null, r);
+        r.current && r.current(await n.json(), null);
+      } catch (n) {
+        console.error(n), r.current && r.current(null, n);
       } finally {
         s(!1);
       }
     })(), () => t.abort();
-  }, [e, o]), u = c(
+  }, [e, o]), u = a(
     (t) => {
-      n.current = t;
+      r.current = t;
     },
     []
   );
-  return { run: i, isRunning: a, onTerminate: u };
+  return { run: i, isRunning: c, onTerminate: u };
 };
 export {
-  h as useFeatureAction
+  R as useTask
 };

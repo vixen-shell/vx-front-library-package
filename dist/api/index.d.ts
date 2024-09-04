@@ -1,3 +1,3 @@
 export type { SocketEvent, SocketEventData, SocketEventHandler, } from './SocketEventHandler';
-export { useFeatureAction, useFeatureData, useFeatureDataStreamer, useImageFiles, useFeatureSocket, useFeatureFrames, useParams, } from './hooks';
+export { useTask, useData, useStream, useFiles, useSocket, useFrames, useParams, } from './hooks';
 export { Api } from './api';

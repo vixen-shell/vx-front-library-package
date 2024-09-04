@@ -1,18 +1,18 @@
-import { useFeatureAction as o } from "./hooks/action.js";
-import { useFeatureData as a } from "./hooks/data.js";
-import { useFeatureDataStreamer as u } from "./hooks/dataStreamer.js";
-import { useImageFiles as p } from "./hooks/files.js";
-import { useFeatureSocket as x } from "./hooks/socket.js";
-import { useFeatureFrames as i } from "./hooks/frames.js";
-import { useParams as A } from "./hooks/params.js";
-import { Api as S } from "./api.js";
+import { useTask as o } from "./hooks/task.js";
+import { useData as s } from "./hooks/data.js";
+import { useStream as p } from "./hooks/Stream.js";
+import { useFiles as x } from "./hooks/files.js";
+import { useSocket as u } from "./hooks/socket.js";
+import { useFrames as k } from "./hooks/frames.js";
+import { useParams as S } from "./hooks/params.js";
+import { Api as l } from "./api.js";
 export {
-  S as Api,
-  o as useFeatureAction,
-  a as useFeatureData,
-  u as useFeatureDataStreamer,
-  i as useFeatureFrames,
-  x as useFeatureSocket,
-  p as useImageFiles,
-  A as useParams
+  l as Api,
+  s as useData,
+  x as useFiles,
+  k as useFrames,
+  S as useParams,
+  u as useSocket,
+  p as useStream,
+  o as useTask
 };

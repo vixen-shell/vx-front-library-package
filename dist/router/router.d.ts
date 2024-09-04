@@ -1,4 +1,4 @@
-import React from 'react';
+import { default as React } from 'react';
 export type RouteItemsType = {
     [key: string]: JSX.Element;
 };
@@ -8,17 +8,11 @@ export declare class Routes {
     static get(key: string): import("react/jsx-runtime").JSX.Element;
     static exists(key: string): boolean | undefined;
 }
-export declare const RouterProvider: React.FC<{
-    initialRoute: string;
-    children: React.ReactNode;
-}>;
-export declare const useRouter: () => {
+export declare const RouterContext: React.Context<{
     route: string;
     setRoute: React.Dispatch<React.SetStateAction<string>>;
-};
-export declare const RouterRender: () => import("react/jsx-runtime").JSX.Element;
-export declare const RouterLink: React.FC<{
-    className?: string;
-    route: string;
+} | undefined>;
+export declare const RouterProvider: React.FC<{
+    initialRoute: string;
     children: React.ReactNode;
 }>;

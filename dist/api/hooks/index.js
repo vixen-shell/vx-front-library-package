@@ -1,16 +1,16 @@
-import { useFeatureAction as t } from "./action.js";
-import { useFeatureData as a } from "./data.js";
-import { useFeatureDataStreamer as m } from "./dataStreamer.js";
-import { useImageFiles as f } from "./files.js";
-import { useFeatureSocket as x } from "./socket.js";
-import { useFeatureFrames as c } from "./frames.js";
-import { useParams as D } from "./params.js";
+import { useTask as o } from "./task.js";
+import { useData as m } from "./data.js";
+import { useStream as a } from "./Stream.js";
+import { useFiles as p } from "./files.js";
+import { useSocket as x } from "./socket.js";
+import { useFrames as F } from "./frames.js";
+import { useParams as c } from "./params.js";
 export {
-  t as useFeatureAction,
-  a as useFeatureData,
-  m as useFeatureDataStreamer,
-  c as useFeatureFrames,
-  x as useFeatureSocket,
-  f as useImageFiles,
-  D as useParams
+  m as useData,
+  p as useFiles,
+  F as useFrames,
+  c as useParams,
+  x as useSocket,
+  a as useStream,
+  o as useTask
 };

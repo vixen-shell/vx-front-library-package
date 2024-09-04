@@ -1,5 +1,5 @@
-import React from 'react';
-import type { SocketEventData } from '../api';
+import { default as React } from 'react';
+import { SocketEventData } from '../api';
 export type GlobalStateType = SocketEventData;
 type ActionType = {
     type: string;
@@ -13,12 +13,11 @@ export declare class GlobalState {
     static get initialState(): GlobalStateType;
     static get reducer(): ReducerType;
 }
+export declare const GlobalStateContext: React.Context<{
+    state: GlobalStateType;
+    dispatch: React.Dispatch<ActionType>;
+} | undefined>;
 export declare const GlobalStateProvider: React.FC<{
     children: React.ReactNode;
 }>;
-export declare const useGlobalState: () => {
-    getItem: (key: string) => any;
-    setItem: (key: string, value: unknown) => void;
-    save: () => void;
-};
 export {};

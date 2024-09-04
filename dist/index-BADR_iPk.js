@@ -2,6 +2,7 @@ import { jsx as f } from "react/jsx-runtime";
 import g from "react-dom";
 import w from "./ui/components/ErrorFrame/index.js";
 import "react";
+import "./api/ApiRoutes.js";
 import { Api as m } from "./api/api.js";
 var i = {}, n = g;
 if (process.env.NODE_ENV === "production")
@@ -71,11 +72,11 @@ function _(a) {
   }
   return { render: E };
 }
-const O = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const S = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   create: _
 }, Symbol.toStringTag, { value: "Module" }));
 export {
   _ as c,
-  O as i
+  S as i
 };

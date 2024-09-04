@@ -1,110 +1,96 @@
-var f = Object.defineProperty;
-var c = (u, e, r) => e in u ? f(u, e, { enumerable: !0, configurable: !0, writable: !0, value: r }) : u[e] = r;
-var m = (u, e, r) => (c(u, typeof e != "symbol" ? e + "" : e, r), r);
-import { jsx as p } from "react/jsx-runtime";
-import { Routes as l, RouterLink as N, useRouter as F } from "../router/router.js";
-import { GlobalState as S, useGlobalState as g } from "../state/state.js";
-import { useFeatureAction as I } from "../api/hooks/action.js";
-import { useFeatureData as k } from "../api/hooks/data.js";
-import { useFeatureDataStreamer as D } from "../api/hooks/dataStreamer.js";
-import { useImageFiles as R } from "../api/hooks/files.js";
-import { useFeatureSocket as d } from "../api/hooks/socket.js";
-import { useFeatureFrames as w } from "../api/hooks/frames.js";
-import { useParams as A } from "../api/hooks/params.js";
-import { Api as b } from "../api/api.js";
-import L from "./FeatureRender.js";
-function a(u, e) {
-  if (!n.isInit)
+import { jsx as f } from "react/jsx-runtime";
+import { Routes as n } from "../router/router.js";
+import { useRouter as p } from "../router/hook.js";
+import { RouterLink as c } from "../router/RouterLink.js";
+import { GlobalState as l } from "../state/state.js";
+import { useGlobalState as N } from "../state/hook.js";
+import { useTask as k } from "../api/hooks/task.js";
+import { useData as S } from "../api/hooks/data.js";
+import { useStream as R } from "../api/hooks/Stream.js";
+import { useFiles as d } from "../api/hooks/files.js";
+import { useSocket as h } from "../api/hooks/socket.js";
+import { useFrames as g } from "../api/hooks/frames.js";
+import { useParams as w } from "../api/hooks/params.js";
+import { Api as F } from "../api/api.js";
+import I from "./FeatureRender.js";
+function t(u, e) {
+  if (!s.isInit)
     throw new Error(`Cannot use '${u}' before feature initialization`);
   return e;
 }
-const t = class t {
+const r = class r {
   static init(e) {
-    if (t.isInit)
+    if (r.isInit)
       throw new Error("Feature is already initialized");
-    return l.define(e), (i, o, s) => (t.isInit = !0, t.featureName = i, s && (S.initialState = s), /* @__PURE__ */ p(
-      L,
+    return n.define(e), (i, m, o) => (r.isInit = !0, r.featureName = i, o && (l.initialState = o), /* @__PURE__ */ f(
+      I,
       {
-        initialRoute: o,
-        state: !!s
+        initialRoute: m,
+        state: !!o
       }
     ));
   }
   static get names() {
-    return a("feature names", b.featureNames);
+    return t("feature names", F.featureNames);
   }
   static get Link() {
-    return a("Link", N);
+    return t("Link", c);
   }
 };
-m(t, "isInit", !1), m(t, "featureName"), m(t, "Use", {
+r.isInit = !1, r.featureName = void 0, r.Use = {
   get Router() {
-    return a("Router", F);
+    return t("Router", p);
   },
   get State() {
-    return a("State", g);
+    return t("State", N);
   },
   Params(e) {
-    return a("Params", A(t.featureName, e));
+    return t("Params", w(r.featureName, e));
   },
-  Frames(e = t.featureName) {
-    return a("Frames", w(e));
+  Frames(e = r.featureName) {
+    return t("Frames", g(e));
   },
-  Action({
-    featureName: e = t.featureName,
-    actionHandler: r
-  }) {
-    return a("Action", I(e, r));
+  Task({ feature: e = r.featureName, handler: a }) {
+    return t("Task", k(e, a));
   },
-  Data({
-    featureName: e = t.featureName,
-    dataHandlers: r
-  }) {
-    return a("Data", k(e, r));
+  Data({ feature: e = r.featureName, handlers: a }) {
+    return t("Data", S(e, a));
   },
-  DataStreamer({
-    featureName: e = t.featureName,
-    dataHandlers: r,
+  Stream({
+    feature: e = r.featureName,
+    handlers: a,
     interval: i = 1,
-    auto: o = !0
+    auto: m = !0
   }) {
-    return a(
-      "DataStreamer",
-      D(
-        t.featureName,
+    return t(
+      "Stream",
+      R(
+        r.featureName,
         e,
-        r,
+        a,
         i,
-        o
+        m
       )
     );
   },
-  ImageFiles({
-    featureName: e = t.featureName,
-    fileHandlers: r
-  }) {
-    return a(
-      "ImageFile",
-      R(e, r)
+  Files({ feature: e = r.featureName, handlers: a }) {
+    return t(
+      "Files",
+      d(e, a)
     );
   },
   Socket({
-    featureName: e = t.featureName,
-    socketName: r,
+    feature: e = r.featureName,
+    name: a,
     auto: i = !0
   }) {
-    return a(
+    return t(
       "Socket",
-      d(
-        t.featureName,
-        e,
-        r,
-        i
-      )
+      h(r.featureName, e, a, i)
     );
   }
-});
-let n = t;
+};
+let s = r;
 export {
-  n as Feature
+  s as Feature
 };

@@ -1,82 +1,78 @@
-import { useState as y, useEffect as d, useCallback as c } from "react";
+import { useState as m, useEffect as h, useCallback as e } from "react";
 import { ApiRoutes as l } from "../ApiRoutes.js";
-const _ = (s) => {
-  const [b, i] = y([]), [g, w] = y([]);
-  d(() => {
+const C = (s) => {
+  const [b, i] = m([]), [g, w] = m([]);
+  h(() => {
     a();
   }, []);
-  const e = c(async (t, o) => {
-    try {
-      const r = await fetch(t, { signal: o });
-      if (!r.ok) {
-        const n = await r.json();
-        throw new Error(n.message);
-      }
-      return await r.json();
-    } catch (r) {
-      throw r;
+  const c = e(async (t, r) => {
+    const o = await fetch(t, { signal: r });
+    if (!o.ok) {
+      const n = await o.json();
+      throw new Error(n.message);
     }
-  }, []), a = c(() => {
-    const t = new AbortController(), { signal: o } = t;
+    return await o.json();
+  }, []), a = e(() => {
+    const t = new AbortController(), { signal: r } = t;
     return (async () => {
       try {
-        const r = await e(
+        const o = await c(
           l.frames_ids(s),
-          o
+          r
         );
-        i(r.ids), w(r.actives);
-      } catch (r) {
-        i([]), w([]), console.error(r);
+        i(o.ids), w(o.actives);
+      } catch (o) {
+        i([]), w([]), console.error(o);
       }
     })(), () => t.abort();
-  }, [s]), p = c(
+  }, [s]), p = e(
     (t) => {
-      const o = new AbortController(), { signal: r } = o;
+      const r = new AbortController(), { signal: o } = r;
       return (async () => {
         try {
-          await e(
+          await c(
             l.frame_toggle(s, t),
-            r
+            o
           ), a();
         } catch (n) {
           console.error(n);
         }
-      })(), () => o.abort();
+      })(), () => r.abort();
     },
     [s]
-  ), h = c(
+  ), y = e(
     (t) => {
-      const o = new AbortController(), { signal: r } = o;
+      const r = new AbortController(), { signal: o } = r;
       return (async () => {
         try {
-          await e(
+          await c(
             l.frame_open(s, t),
-            r
+            o
           ), a();
         } catch (n) {
           console.error(n);
         }
-      })(), () => o.abort();
+      })(), () => r.abort();
     },
     [s]
-  ), u = c(
+  ), d = e(
     (t) => {
-      const o = new AbortController(), { signal: r } = o;
+      const r = new AbortController(), { signal: o } = r;
       return (async () => {
         try {
-          await e(
+          await c(
             l.frame_close(s, t),
-            r
+            o
           ), a();
         } catch (n) {
           console.error(n);
         }
-      })(), () => o.abort();
+      })(), () => r.abort();
     },
     [s]
   );
-  return { ids: b, actives: g, toggle: p, open: h, close: u };
+  return { ids: b, actives: g, toggle: p, open: y, close: d };
 };
 export {
-  _ as useFeatureFrames
+  C as useFrames
 };

@@ -1,8 +1,12 @@
-import { RouterLink as o, RouterProvider as t, RouterRender as u, Routes as R, useRouter as d } from "./router.js";
+import { Routes as o } from "./router.js";
+import { RouterProvider as p } from "./router.js";
+import { useRouter as r } from "./hook.js";
+import { RouterLink as i } from "./RouterLink.js";
+const u = () => o.get(r().route);
 export {
-  o as RouterLink,
-  t as RouterProvider,
+  i as RouterLink,
+  p as RouterProvider,
   u as RouterRender,
-  R as Routes,
-  d as useRouter
+  o as Routes,
+  r as useRouter
 };

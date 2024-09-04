@@ -7,7 +7,7 @@ export declare class Api {
     private static _isInit;
     static init(featureName: string): Promise<void>;
     static get isInit(): boolean;
-    static ping(): Promise<Boolean>;
+    static ping(): Promise<boolean>;
     static get stateEvents(): SocketEventHandler;
     static getInitialState(): Promise<GlobalStateType | null>;
 }
