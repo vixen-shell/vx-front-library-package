@@ -8,6 +8,7 @@ export declare class Api {
     static init(featureName: string): Promise<void>;
     static get isInit(): boolean;
     static ping(): Promise<boolean>;
+    static prefer_dark_theme(): Promise<boolean>;
     static get stateEvents(): SocketEventHandler;
     static getInitialState(): Promise<GlobalStateType | null>;
 }

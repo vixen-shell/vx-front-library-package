@@ -65,7 +65,7 @@ const r = class r {
     return e("http", `/frame/${t}/close/${a}`);
   }
 };
-r.ping = e("http", "/ping"), r.shutdown = e("http", "/shutdown"), r.features_names = e("http", "/features/names");
+r.ping = e("http", "/ping"), r.shutdown = e("http", "/shutdown"), r.prefer_dark_theme = e("http", "/prefer_dark_theme"), r.features_names = e("http", "/features/names");
 let u = r;
 export {
   u as ApiRoutes
