@@ -8,7 +8,11 @@ export declare class Api {
     static init(featureName: string): Promise<void>;
     static get isInit(): boolean;
     static ping(): Promise<boolean>;
-    static prefer_dark_theme(): Promise<boolean>;
+    static gtkDarkTheme(): Promise<boolean>;
+    static gtkDefaultFont(): Promise<{
+        font_family: string;
+        font_size: number;
+    }>;
     static get stateEvents(): SocketEventHandler;
     static getInitialState(): Promise<GlobalStateType | null>;
 }
