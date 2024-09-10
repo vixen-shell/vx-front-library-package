@@ -5,29 +5,6 @@ interface HandlerInfo {
     name: string;
     args?: any[];
 }
-interface useTaskProps {
-    feature?: string;
-    handler: HandlerInfo;
-}
-interface useDataProps {
-    feature?: string;
-    handlers: HandlerInfo[];
-}
-interface useStreamProps {
-    feature?: string;
-    handlers: HandlerInfo[];
-    interval?: number;
-    auto?: boolean;
-}
-interface useFilesProps {
-    feature?: string;
-    handlers: Record<string, HandlerInfo>;
-}
-interface useSocketProps {
-    feature?: string;
-    name: string;
-    auto?: boolean;
-}
 export declare class Feature {
     static isInit: boolean;
     static featureName: string | undefined;
@@ -59,22 +36,21 @@ export declare class Feature {
             open: (frameId: string) => () => void;
             close: (frameId: string) => () => void;
         };
-        Task({ feature, handler }: useTaskProps): {
-            run: () => () => void;
-            isRunning: boolean;
-            onTerminate: (callback: (data: any, error: any) => void) => void;
+        Task(handler: HandlerInfo): {
+            run: (args?: any[]) => () => void;
+            afterRun: (callback: (data: any, error: any) => void) => void;
         };
-        Data({ feature, handlers }: useDataProps): {
+        Data(handlers: HandlerInfo[]): {
             update: () => void;
             data: Record<string, any>;
         };
-        Stream({ feature, handlers, interval, auto, }: useStreamProps): {
+        Stream(handlers: HandlerInfo[], interval?: number, auto?: boolean): {
             data: Record<string, any>;
             start: () => void;
             stop: () => void;
         };
-        Files({ feature, handlers }: useFilesProps): Record<string, string | undefined>;
-        Socket({ feature, name, auto, }: useSocketProps): SocketEventHandler;
+        Files(handlers: Record<string, HandlerInfo>): Record<string, string | undefined>;
+        Socket(name: string, auto?: boolean): SocketEventHandler;
     };
 }
 export {};
