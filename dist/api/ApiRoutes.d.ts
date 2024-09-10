@@ -1,7 +1,6 @@
 export declare class ApiRoutes {
     static readonly ping: string;
     static readonly shutdown: string;
-    static readonly gtk_dark_theme: string;
     static readonly gtk_default_font: string;
     static readonly features_names: string;
     static feature_start(featureName: string): string;

@@ -1,10 +1,10 @@
 import { jsx as d } from "react/jsx-runtime";
-import _ from "react-dom";
-import h from "./ui/components/ErrorFrame/index.js";
+import w from "react-dom";
+import E from "./ui/components/ErrorFrame/index.js";
 import "react";
 import "./api/ApiRoutes.js";
 import { Api as u } from "./api/api.js";
-var i = {}, n = _;
+var i = {}, n = w;
 if (process.env.NODE_ENV === "production")
   i.createRoot = n.createRoot, i.hydrateRoot = n.hydrateRoot;
 else {
@@ -25,15 +25,15 @@ else {
     }
   };
 }
-function R() {
+function h() {
   const o = new URLSearchParams(window.location.search);
   return {
     featureName: o.get("feature"),
     initialRoute: o.get("route")
   };
 }
-function F(o) {
-  const e = R(), f = (r) => /* @__PURE__ */ d(h, { message: r });
+function _(o) {
+  const e = h(), f = (r) => /* @__PURE__ */ d(E, { message: r });
   async function y(r) {
     const t = e.featureName;
     if (!t)
@@ -55,12 +55,23 @@ function F(o) {
   }
   async function g(r) {
     await u.init(e.featureName);
-    const t = await u.gtkDarkTheme(), a = await u.gtkDefaultFont(), l = a.font_family || "sans-serif", p = a.font_size || 12, E = t ? "255, 255, 255" : "0, 0, 0", m = document.createElement("style");
+    const t = await u.gtkDefaultFont(), a = t.font_family || "sans-serif", l = t.font_size || 12, m = document.createElement("style");
     m.textContent = `
+            @media (prefers-color-scheme: dark) {
+                :root {
+                    --default-font-color: rgba(255, 255, 255, 0.75);
+                }
+            }
+
+            @media (prefers-color-scheme: light) {
+                :root {
+                    --default-font-color: rgba(0, 0, 0, 0.75);
+                }
+            }
+
             :root {
-                --default-font-family: ${l};
-                --default-font-size: ${p}pt;
-                --default-font-color: rgba(${E}, 0.8);
+                --default-font-family: ${a};
+                --default-font-size: ${l}pt;
 
                 font-family: var(--default-font-family);
                 font-size: var(--default-font-size);
@@ -69,7 +80,7 @@ function F(o) {
                 user-select: none !important;
                 -webkit-user-select: none !important;
             }
-            
+
             * {
                 box-sizing: border-box;
                 cursor: default;
@@ -83,7 +94,7 @@ function F(o) {
       )
     );
   }
-  async function w(r) {
+  async function p(r) {
     try {
       const t = await y(r);
       await g(t);
@@ -91,13 +102,13 @@ function F(o) {
       console.error(t), c(f(t.message));
     }
   }
-  return { render: w };
+  return { render: p };
 }
-const C = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const z = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  create: F
+  create: _
 }, Symbol.toStringTag, { value: "Module" }));
 export {
-  F as c,
-  C as i
+  _ as c,
+  z as i
 };
