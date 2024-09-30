@@ -1,17 +1,15 @@
 import { jsx as r } from "react/jsx-runtime";
-import { GlobalStateProvider as i } from "../state/state.js";
+import { GlobalStateProvider as m } from "../state/state.js";
 import "react";
 import "../api/ApiRoutes.js";
 import "../api/api.js";
-import { RouterRender as m } from "../router/index.js";
-import { RouterProvider as d } from "../router/router.js";
-const c = ({
-  initialRoute: e,
-  state: t
-}) => {
-  const o = () => /* @__PURE__ */ r(d, { initialRoute: e, children: /* @__PURE__ */ r(m, {}) });
-  return t ? /* @__PURE__ */ r(i, { children: /* @__PURE__ */ r(o, {}) }) : /* @__PURE__ */ r(o, {});
+import { RouterRender as d } from "../router/index.js";
+import { ThemeProvider as n } from "../theme/ThemeProvider.js";
+import { RouterProvider as p } from "../router/router.js";
+const P = ({ initialTheme: o, initialRoute: t, state: i }) => {
+  const e = () => /* @__PURE__ */ r(p, { initialRoute: t, children: /* @__PURE__ */ r(d, {}) });
+  return /* @__PURE__ */ r(n, { initialTheme: o, children: /* @__PURE__ */ r(i ? () => /* @__PURE__ */ r(m, { children: /* @__PURE__ */ r(e, {}) }) : e, {}) });
 };
 export {
-  c as default
+  P as default
 };
