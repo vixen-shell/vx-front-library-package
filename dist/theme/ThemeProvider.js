@@ -1,30 +1,29 @@
-import { jsx as e } from "react/jsx-runtime";
+import { jsx as m } from "react/jsx-runtime";
 import '../assets/styles.css';import '../assets/ThemeProvider.css';/* empty css                 */
-import { createTheme as r, MantineProvider as c } from "@mantine/core";
-import { createContext as l, useState as i } from "react";
-const s = l(
-  void 0
-), C = ({
-  initialTheme: o,
+import { MantineProvider as r, createTheme as i } from "@mantine/core";
+import "../state/state.js";
+import { useGlobalState as a } from "../state/hook.js";
+import { useEffect as n } from "react";
+const _ = ({
+  fonts: e,
   children: t
 }) => {
-  const [m, n] = i(
-    r({
-      fontFamily: o.font_family,
-      fontFamilyMonospace: o.font_family_monospace,
-      primaryColor: o.ui_color
-    })
-  ), a = (f) => {
-    n(
-      r({
-        primaryColor: f,
-        fontFamily: o.font_family
-      })
-    );
-  };
-  return /* @__PURE__ */ e(s.Provider, { value: { setThemeColor: a }, children: /* @__PURE__ */ e(c, { theme: m, defaultColorScheme: "auto", children: t }) });
+  const { getItem: o } = a();
+  return n(() => {
+    document.documentElement.style.zoom = String(o("vx_ui_scale"));
+  }, [o]), /* @__PURE__ */ m(
+    r,
+    {
+      theme: i({
+        fontFamily: e.font_family,
+        fontFamilyMonospace: e.font_family_monospace,
+        primaryColor: o("vx_ui_color")
+      }),
+      defaultColorScheme: "auto",
+      children: t
+    }
+  );
 };
 export {
-  s as ThemeContext,
-  C as ThemeProvider
+  _ as ThemeProvider
 };

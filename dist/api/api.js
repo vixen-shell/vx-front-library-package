@@ -1,20 +1,18 @@
 import { ApiRoutes as e } from "./ApiRoutes.js";
 import { SocketEventHandler as c } from "./SocketEventHandler.js";
-async function i(n, a = !1) {
-  if (!a && !s.isInit) throw new Error("Api not initialized");
-  const r = await fetch(n);
-  if (!r.ok) {
-    const o = await r.json();
+async function i(r, a = !1) {
+  if (!a && !n.isInit) throw new Error("Api not initialized");
+  const s = await fetch(r);
+  if (!s.ok) {
+    const o = await s.json();
     throw new Error(o.message || "Request Error");
   }
-  return await r.json();
+  return await s.json();
 }
 const t = class t {
   static async init(a) {
     if (!await t.ping()) throw new Error("Unable to acces Vixen Api.");
-    t.featureNames = (await i(e.features_names, !0)).names, t.currentFeatureName = a, t._stateEvents = new c(
-      e.feature_state_socket(t.currentFeatureName)
-    ), t._stateEvents.connect(), t._isInit = !0;
+    t.featureNames = (await i(e.features_names, !0)).names, t.currentFeatureName = a, t._stateEvents = new c(e.vx_state_socket), t._stateEvents.connect(), t._isInit = !0;
   }
   static get isInit() {
     return t._isInit;
@@ -31,14 +29,14 @@ const t = class t {
     throw new Error("Api not initialized");
   }
   static async getInitialState() {
-    return (await i(e.feature_state(t.currentFeatureName))).state || null;
+    return await i(e.vx_state);
   }
-  static async getInitialTheme() {
-    return await i(e.vx_theme);
+  static async getGtkFonts() {
+    return await i(e.gtk_fonts);
   }
 };
 t.featureNames = void 0, t.currentFeatureName = void 0, t._stateEvents = void 0, t._isInit = !1;
-let s = t;
+let n = t;
 export {
-  s as Api
+  n as Api
 };

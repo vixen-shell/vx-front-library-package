@@ -1,5 +1,5 @@
 import { jsx as i } from "react/jsx-runtime";
-import n from "../ui/components/ErrorFrame/index.js";
+import { ErrorFrame as n } from "../components/ErrorFrame.js";
 import { createContext as a, useState as c } from "react";
 const t = class t {
   static define(e) {

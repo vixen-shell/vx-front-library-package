@@ -1,5 +1,4 @@
-import { ThemeContext as r, ThemeProvider as m } from "./ThemeProvider.js";
+import { ThemeProvider as o } from "./ThemeProvider.js";
 export {
-  r as ThemeContext,
-  m as ThemeProvider
+  o as ThemeProvider
 };

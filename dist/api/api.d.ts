@@ -9,11 +9,9 @@ export declare class Api {
     static get isInit(): boolean;
     static ping(): Promise<boolean>;
     static get stateEvents(): SocketEventHandler;
-    static getInitialState(): Promise<GlobalStateType | null>;
-    static getInitialTheme(): Promise<{
+    static getInitialState(): Promise<GlobalStateType>;
+    static getGtkFonts(): Promise<{
         font_family: string;
         font_family_monospace: string;
-        ui_scale: number;
-        ui_color: string;
     }>;
 }

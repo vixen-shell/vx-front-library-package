@@ -1,8 +1,18 @@
-function e(f, t) {
+function e(c, t) {
   const [a, s] = ["localhost", "6481"];
-  return `${f}://${a}:${s}${t}`;
+  return `${c}://${a}:${s}${t}`;
 }
 const r = class r {
+  static system_icons(t) {
+    return e("http", `/system_icons/${t}`);
+  }
+  static phosphor_icons(t, a = void 0) {
+    const s = a ? `?icon_style=${a}` : "";
+    return e("http", `/phosphor_icons/${t}/${s}`);
+  }
+  static image_file(t) {
+    return e("http", `/image_file/?filepath=${t}`);
+  }
   // ----------------------------------- - - -
   // ENDPOINTS :: FEATURE
   static feature_start(t) {
@@ -11,18 +21,11 @@ const r = class r {
   static feature_stop(t) {
     return e("http", `/feature/${t}/stop`);
   }
-  static feature_state(t) {
-    return e("http", `/feature/${t}/state`);
-  }
   static feature_get_param(t, a) {
     return e("http", `/feature/${t}/get_param/${a}`);
   }
   static feature_set_param(t, a) {
     return e("http", `/feature/${t}/set_param/${a}`);
-  }
-  // WEBSOCKETS :: FEATURE STATE
-  static feature_state_socket(t) {
-    return e("ws", `/feature/${t}/state`);
   }
   // ----------------------------------- - - -
   // ENDPOINTS :: FEATURE CONTENTS
@@ -31,9 +34,6 @@ const r = class r {
   }
   static feature_data(t) {
     return e("http", `/feature/${t}/data`);
-  }
-  static feature_file(t) {
-    return e("http", `/feature/${t}/file`);
   }
   // WEBSOCKETS :: FEATURE CONTENTS
   static feature_data_streamer(t, a) {
@@ -65,8 +65,8 @@ const r = class r {
     return e("http", `/frame/${t}/close/${a}`);
   }
 };
-r.ping = e("http", "/ping"), r.shutdown = e("http", "/shutdown"), r.vx_theme = e("http", "/vx_theme"), r.features_names = e("http", "/features/names");
-let u = r;
+r.ping = e("http", "/ping"), r.shutdown = e("http", "/shutdown"), r.gtk_fonts = e("http", "/gtk_fonts"), r.vx_state = e("http", "/vx_state"), r.vx_state_socket = e("ws", "/vx_state"), r.features_names = e("http", "/features/names");
+let i = r;
 export {
-  u as ApiRoutes
+  i as ApiRoutes
 };
