@@ -1,16 +1,22 @@
 import { useTask as o } from "./hooks/task.js";
 import { useData as t } from "./hooks/data.js";
-import { useStream as p } from "./hooks/Stream.js";
+import { useStream as u } from "./hooks/Stream.js";
 import { useSocket as f } from "./hooks/socket.js";
-import { useFrames as u } from "./hooks/frames.js";
-import { useParams as S } from "./hooks/params.js";
-import { Api as i } from "./api.js";
+import { useFrames as a } from "./hooks/frames.js";
+import { useParams as k } from "./hooks/params.js";
+import { useSystray as y } from "./hooks/systray.js";
+import { useMenu as M } from "./hooks/menu.js";
+import { useDbusMenu as c } from "./hooks/dbusmenu.js";
+import { BaseApi as A } from "./api.js";
 export {
-  i as Api,
+  A as BaseApi,
   t as useData,
-  u as useFrames,
-  S as useParams,
+  c as useDbusMenu,
+  a as useFrames,
+  M as useMenu,
+  k as useParams,
   f as useSocket,
-  p as useStream,
+  u as useStream,
+  y as useSystray,
   o as useTask
 };

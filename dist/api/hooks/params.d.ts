@@ -1,4 +1,5 @@
-export declare const useParams: (feature: string, paths: string[]) => {
-    params: Record<string, any>;
-    setParam: (paramPath: string, value: any) => () => void;
+export declare const useParams: (paths: string[], feature?: string) => {
+    get: (path: string) => any;
+    set: (path: string, value: any) => () => void;
+    save: () => () => void;
 };

@@ -1,85 +1,64 @@
-import { jsx as f } from "react/jsx-runtime";
-import { Routes as p } from "../router/router.js";
-import { useRouter as c } from "../router/hook.js";
-import { Link as N } from "../router/Link.js";
-import { GlobalState as S } from "../state/state.js";
-import { useGlobalState as l } from "../state/hook.js";
-import { useTask as k } from "../api/hooks/task.js";
-import { useData as d } from "../api/hooks/data.js";
-import { useStream as h } from "../api/hooks/Stream.js";
-import { useSocket as R } from "../api/hooks/socket.js";
-import { useFrames as g } from "../api/hooks/frames.js";
-import { useParams as w } from "../api/hooks/params.js";
-import { Api as I } from "../api/api.js";
-import b from "./FeatureRender.js";
-function r(o, e) {
-  if (!m.isInit)
+import { jsx as s } from "react/jsx-runtime";
+import { Routes as n } from "../router/router.js";
+import { useRouter as m } from "../router/hook.js";
+import { Link as u } from "../router/Link.js";
+import { GlobalState as f } from "../state/state.js";
+import { useVxState as p } from "../stateHook/index.js";
+import { useTask as c } from "../api/hooks/task.js";
+import { useData as l } from "../api/hooks/data.js";
+import "react";
+import { BaseApi as i } from "../api/api.js";
+import "../api/ApiRoutes.js";
+import { useSocket as g } from "../api/hooks/socket.js";
+import { useFrames as k } from "../api/hooks/frames.js";
+import { useParams as S } from "../api/hooks/params.js";
+import { useMenu as R } from "../api/hooks/menu.js";
+import d from "./FeatureRender.js";
+function t(o, e) {
+  if (!a.isInit)
     throw new Error(`Cannot use '${o}' before feature initialization`);
   return e;
 }
-const t = class t {
+const r = class r {
   static init(e) {
-    if (t.isInit)
+    if (r.isInit)
       throw new Error("Feature is already initialized");
-    return p.define(e), (i, u, s, n) => (t.isInit = !0, t.featureName = i, S.initialState = n, /* @__PURE__ */ f(
-      b,
-      {
-        gtkFonts: u,
-        initialRoute: s
-      }
-    ));
+    return n.define(e), () => (r.isInit = !0, f.initialState = i.state.initial, /* @__PURE__ */ s(d, { initialRoute: i.urlParams.route }));
   }
   static get names() {
-    return r("feature names", I.featureNames);
+    return t("feature names", i.features);
   }
   static get Link() {
-    return r("Link", N);
+    return t("Link", u);
   }
 };
-t.isInit = !1, t.featureName = void 0, t.Use = {
+r.isInit = !1, r.featureName = void 0, r.Use = {
   get Router() {
-    return r("Router", c);
+    return t("Router", m);
   },
   get State() {
-    return r("State", l);
+    return t("State", p);
   },
-  Params(e) {
-    return r("Params", w(t.featureName, e));
+  get Params() {
+    return t("Params", S);
   },
-  Frames(e = t.featureName) {
-    return r("Frames", g(e));
+  get Frames() {
+    return t("Frames", k);
   },
-  Task(e) {
-    return r("Task", k(t.featureName, e));
+  get Task() {
+    return t("Task", c);
   },
-  Data(e) {
-    return r("Data", d(t.featureName, e));
+  get Data() {
+    return t("Data", l);
   },
-  Stream(e, a = 1, i = !0) {
-    return r(
-      "Stream",
-      h(
-        t.featureName,
-        t.featureName,
-        e,
-        a,
-        i
-      )
-    );
+  get Menu() {
+    return t("Menu", R);
   },
-  Socket(e, a = !0) {
-    return r(
-      "Socket",
-      R(
-        t.featureName,
-        t.featureName,
-        e,
-        a
-      )
-    );
+  get Socket() {
+    return t("Socket", g);
   }
 };
-let m = t;
+let a = r;
 export {
-  m as Feature
+  a as Feature
 };

@@ -1,19 +1,22 @@
-import { useRef as i, useEffect as m } from "react";
-import { ApiRoutes as u } from "../ApiRoutes.js";
-import { SocketEventHandler as R } from "../SocketEventHandler.js";
-const d = (n, c, s, r) => {
-  const t = i(
-    new R(u.feature_socket(n, c, s))
+import { useRef as c, useEffect as s } from "react";
+import { BaseApi as u } from "../api.js";
+import { ApiRoutes as m } from "../ApiRoutes.js";
+import { SocketEventHandler as f } from "../SocketEventHandler.js";
+const E = (o) => {
+  const r = c(
+    new f(
+      m.feature_socket(u.urlParams.feature, o)
+    )
   );
-  return m(() => {
-    const e = t.current, o = (f) => {
-      console.error(f.message);
+  return s(() => {
+    const e = r.current, t = (n) => {
+      console.error(n.message);
     };
-    return e.addEventListener("ERROR", o), r && e.connect(), () => {
-      e.removeEventListener("ERROR", o), r && e.disconnect();
+    return e.addEventListener("ERROR", t), e.connect(), () => {
+      e.removeEventListener("ERROR", t), e.disconnect();
     };
-  }, [r]), t.current;
+  }, []), r.current;
 };
 export {
-  d as useSocket
+  E as useSocket
 };

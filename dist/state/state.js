@@ -1,13 +1,13 @@
 import { jsx as d } from "react/jsx-runtime";
-import { createContext as c, useReducer as u, useEffect as l } from "react";
+import { createContext as c, useReducer as l, useEffect as u } from "react";
+import { BaseApi as n } from "../api/api.js";
 import "../api/ApiRoutes.js";
-import { Api as o } from "../api/api.js";
 const t = class t {
-  static set initialState(a) {
+  static set initialState(o) {
     if (t._initialState)
       console.error("Initial state is already set.");
     else {
-      t._initialState = a;
+      t._initialState = o;
       const i = {};
       for (const e in t._initialState)
         i[`update_${e}`] = e;
@@ -24,26 +24,32 @@ const t = class t {
   }
 };
 t._initialState = void 0, t._reducer = void 0;
-let n = t;
-const p = c(void 0), m = ({ children: s }) => {
-  const [a, i] = u(
-    n.reducer,
-    n.initialState
+let a = t;
+const p = c(void 0), y = ({ children: s }) => {
+  const [o, i] = l(
+    a.reducer,
+    a.initialState
   );
-  return l(() => {
+  return u(() => {
     function e(r) {
       i({
         type: `update_${r.key}`,
         payload: r.value
       });
     }
-    return o.stateEvents.addEventListener("UPDATE", e), () => {
-      o.stateEvents.removeEventListener("UPDATE", e);
+    return n.state.eventHandler.addEventListener(
+      "UPDATE",
+      e
+    ), n.state.eventHandler.connect(), () => {
+      n.state.eventHandler.removeEventListener(
+        "UPDATE",
+        e
+      ), n.state.eventHandler.disconnect();
     };
-  }, []), /* @__PURE__ */ d(p.Provider, { value: { state: a, dispatch: i }, children: s });
+  }, []), /* @__PURE__ */ d(p.Provider, { value: { state: o, dispatch: i }, children: s });
 };
 export {
-  n as GlobalState,
+  a as GlobalState,
   p as GlobalStateContext,
-  m as GlobalStateProvider
+  y as GlobalStateProvider
 };

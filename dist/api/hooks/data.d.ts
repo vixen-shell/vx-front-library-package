@@ -1,9 +1,11 @@
-interface HandlerInfo {
-    name: string;
-    args?: any[];
-}
-export declare const useData: (feature: string, handlers: HandlerInfo[]) => {
-    update: () => () => void;
-    data: Record<string, any>;
+export declare const useData: () => {
+    get: (key: string, handler?: {
+        name: string;
+        args?: any[];
+    }) => any;
+    stream: (key: string, handler?: {
+        name: string;
+        args?: any[];
+    }) => any;
+    setInterval: (value: number) => void;
 };
-export {};

@@ -1,4 +1,7 @@
-export declare const SystemIcon: React.FC<{
+interface SystemIconProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'style'> {
     iconName: string;
-    size: number;
-}>;
+    style?: React.CSSProperties;
+    size?: string | number;
+}
+export declare const SystemIcon: React.FC<SystemIconProps>;
+export {};

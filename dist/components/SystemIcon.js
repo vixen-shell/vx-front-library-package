@@ -1,54 +1,66 @@
-import { jsx as l } from "react/jsx-runtime";
-import { useState as u, useRef as f, useEffect as m } from "react";
-import { ApiRoutes as h } from "../api/ApiRoutes.js";
-import { ImageBroken as d } from "./ImageBroken.js";
-async function g(o) {
-  const e = await fetch(h.system_icons(o));
-  if (!e.ok) {
-    const r = await e.json();
-    throw new Error(r.message || "Unhandled error");
+import { jsx as m } from "react/jsx-runtime";
+import { useState as f, useRef as h, useEffect as d } from "react";
+import { ApiRoutes as g } from "../api/ApiRoutes.js";
+import { ImageBroken as p } from "./ImageBroken.js";
+async function w(r) {
+  const o = await fetch(g.system_icons(r));
+  if (!o.ok) {
+    const t = await o.json();
+    throw new Error(t.message || "Unhandled error");
   }
-  const t = await e.blob();
-  if (t.type !== "image/svg+xml")
+  const e = await o.blob();
+  if (e.type !== "image/svg+xml")
     throw new Error("Unsupported file type");
-  return t;
+  return e;
 }
-async function p(o) {
-  return new Promise((e, t) => {
-    const r = new FileReader();
-    r.onload = () => {
-      e(r.result);
-    }, r.onerror = () => {
-      t(new Error("Error reading blob"));
-    }, r.readAsText(o);
+async function b(r) {
+  return new Promise((o, e) => {
+    const t = new FileReader();
+    t.onload = () => {
+      o(t.result);
+    }, t.onerror = () => {
+      e(new Error("Error reading blob"));
+    }, t.readAsText(r);
   });
 }
-function w(o) {
-  const t = new DOMParser().parseFromString(
-    o,
+function y(r) {
+  const e = new DOMParser().parseFromString(
+    r,
     "image/svg+xml"
-  ).documentElement, r = t.getAttribute("width"), n = t.getAttribute("height");
-  return t.setAttribute("viewBox", `0 0 ${r} ${n}`), t;
+  ).documentElement, t = e.getAttribute("width"), s = e.getAttribute("height");
+  return e.setAttribute("viewBox", `0 0 ${t} ${s}`), e;
 }
-const v = ({ iconName: o, size: e = 32 }) => {
-  const [t, r] = u(!1), [n, i] = u(null), a = f(document.createElement("div"));
-  return m(() => ((async () => {
-    r(!1);
+const A = ({
+  iconName: r,
+  style: o = void 0,
+  size: e = 32,
+  ...t
+}) => {
+  const [s, a] = f(!1), [c, l] = f(null), u = h(document.createElement("div"));
+  return d(() => ((async () => {
+    a(!1);
     try {
-      i(await g(o));
-    } catch (s) {
-      console.error(s), r(!0);
+      l(await w(r));
+    } catch (n) {
+      console.error(n), a(!0);
     }
-  })(), () => i(null)), [o]), m(() => {
-    const s = a.current;
-    return n && (async () => {
-      const c = w(await p(n));
-      e && (c.style.width = String(e), c.style.height = String(e)), s.appendChild(c.cloneNode(!0));
+  })(), () => l(null)), [r]), d(() => {
+    const n = u.current;
+    return c && (async () => {
+      const i = y(await b(c));
+      e && (i.style.width = String(e), i.style.height = String(e)), n.appendChild(i.cloneNode(!0));
     })(), () => {
-      s.innerHTML = "";
+      n.innerHTML = "";
     };
-  }, [n, e]), t ? /* @__PURE__ */ l(d, { size: e, color: "grey" }) : /* @__PURE__ */ l("div", { style: { width: e, height: e }, ref: a });
+  }, [c, e]), s ? /* @__PURE__ */ m(p, { size: e, color: "grey" }) : /* @__PURE__ */ m(
+    "div",
+    {
+      ...t,
+      style: { ...o, width: e, height: e },
+      ref: u
+    }
+  );
 };
 export {
-  v as SystemIcon
+  A as SystemIcon
 };

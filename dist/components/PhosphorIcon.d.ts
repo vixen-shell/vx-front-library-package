@@ -1,6 +1,9 @@
-export declare const PhosphorIcon: React.FC<{
+interface PhosphorIconProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'style'> {
     iconName: string;
-    iconStyle: 'bold' | 'duotone' | 'fill' | 'light' | 'regular' | 'thin' | undefined;
-    size: number;
-    color: string | undefined;
-}>;
+    style?: React.CSSProperties;
+    iconStyle?: 'bold' | 'duotone' | 'fill' | 'light' | 'regular' | 'thin';
+    size?: string | number;
+    color?: string;
+}
+export declare const PhosphorIcon: React.FC<PhosphorIconProps>;
+export {};

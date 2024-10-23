@@ -1,42 +1,48 @@
-import { useRef as f, useCallback as c } from "react";
-import { ApiRoutes as p } from "../ApiRoutes.js";
-const b = (e, n) => {
-  const o = f(), a = c(
-    (t) => {
-      t && (n.args = t);
-      const s = new AbortController(), { signal: u } = s;
-      return (async () => {
-        try {
-          const r = await fetch(
-            p.feature_action(e),
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify(n),
-              signal: u
-            }
-          );
-          if (!r.ok) {
-            const l = await r.json();
-            throw new Error(l.message);
-          }
-          o.current && o.current(await r.json(), null);
-        } catch (r) {
-          console.error(r), o.current && o.current(null, r);
+import { useRef as i, useCallback as c } from "react";
+import { BaseApi as l } from "../api.js";
+import { ApiRoutes as f } from "../ApiRoutes.js";
+async function p(r, n) {
+  const o = await fetch(
+    f.feature_action(l.urlParams.feature),
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(r),
+      signal: n
+    }
+  );
+  if (!o.ok) {
+    const t = await o.json();
+    throw new Error(t.message);
+  }
+  return await o.json();
+}
+const h = () => {
+  const r = i(), n = c((t, a) => {
+    const s = new AbortController(), { signal: u } = s;
+    return (async () => {
+      try {
+        if (await p({ name: t, args: a }, u), r.current) {
+          const e = {
+            name: t,
+            args: a
+          };
+          r.current(e, null);
         }
-      })(), () => s.abort();
-    },
-    [e, n]
-  ), i = c(
+      } catch (e) {
+        console.error(e), r.current && r.current(null, e);
+      }
+    })(), () => s.abort();
+  }, []), o = c(
     (t) => {
-      o.current = t;
+      r.current = t;
     },
     []
   );
-  return { run: a, afterRun: i };
+  return { run: n, afterRun: o };
 };
 export {
-  b as useTask
+  h as useTask
 };

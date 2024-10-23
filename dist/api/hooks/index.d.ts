@@ -4,3 +4,6 @@ export { useStream } from './Stream';
 export { useSocket } from './socket';
 export { useFrames } from './frames';
 export { useParams } from './params';
+export { useSystray } from './systray';
+export { useMenu } from './menu';
+export { useDbusMenu } from './dbusmenu';

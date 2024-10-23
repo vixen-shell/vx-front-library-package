@@ -1,6 +1,6 @@
-function e(c, t) {
+function e(n, t) {
   const [a, s] = ["localhost", "6481"];
-  return `${c}://${a}:${s}${t}`;
+  return `${n}://${a}:${s}${t}`;
 }
 const r = class r {
   static system_icons(t) {
@@ -27,6 +27,9 @@ const r = class r {
   static feature_set_param(t, a) {
     return e("http", `/feature/${t}/set_param/${a}`);
   }
+  static feature_save_params(t) {
+    return e("http", `/feature/${t}/save_params`);
+  }
   // ----------------------------------- - - -
   // ENDPOINTS :: FEATURE CONTENTS
   static feature_action(t) {
@@ -35,18 +38,24 @@ const r = class r {
   static feature_data(t) {
     return e("http", `/feature/${t}/data`);
   }
-  // WEBSOCKETS :: FEATURE CONTENTS
-  static feature_data_streamer(t, a) {
-    return e(
-      "ws",
-      `/feature/${t}/data_streamer/${a}`
-    );
+  static feature_menu(t) {
+    return e("http", `/feature/${t}/menu`);
   }
-  static feature_socket(t, a, s) {
-    return e(
-      "ws",
-      `/feature/${t}/sockets/${a}/${s}`
-    );
+  static feature_dbus_menu(t) {
+    return e("http", `/feature/${t}/dbus_menu`);
+  }
+  // WEBSOCKETS :: FEATURE CONTENTS
+  static feature_state_socket(t) {
+    return e("ws", `/feature/${t}/state`);
+  }
+  static feature_systray_socket(t) {
+    return e("ws", `/feature/${t}/systray`);
+  }
+  static feature_data_streamer_socket(t) {
+    return e("ws", `/feature/${t}/data_streamer`);
+  }
+  static feature_socket(t, a) {
+    return e("ws", `/feature/${t}/sockets/${a}`);
   }
   // ----------------------------------- - - -
   // ENDPOINTS :: FRAMES
@@ -65,8 +74,8 @@ const r = class r {
     return e("http", `/frame/${t}/close/${a}`);
   }
 };
-r.ping = e("http", "/ping"), r.shutdown = e("http", "/shutdown"), r.gtk_fonts = e("http", "/gtk_fonts"), r.vx_state = e("http", "/vx_state"), r.vx_state_socket = e("ws", "/vx_state"), r.features_names = e("http", "/features/names");
-let i = r;
+r.ping = e("http", "/ping"), r.shutdown = e("http", "/shutdown"), r.gtk_fonts = e("http", "/gtk_fonts"), r.vx_state = e("http", "/vx_state"), r.features_names = e("http", "/features/names");
+let u = r;
 export {
-  i as ApiRoutes
+  u as ApiRoutes
 };

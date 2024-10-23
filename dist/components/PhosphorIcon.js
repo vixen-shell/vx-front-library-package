@@ -1,60 +1,73 @@
-import { jsx as d } from "react/jsx-runtime";
-import { useState as a, useRef as w, useEffect as l } from "react";
-import { ApiRoutes as v } from "../api/ApiRoutes.js";
-import { ImageBroken as E } from "./ImageBroken.js";
-import "../state/state.js";
-import { useGlobalState as b } from "../state/hook.js";
-async function y(o, r = void 0) {
-  const e = await fetch(v.phosphor_icons(o, r));
-  if (!e.ok) {
-    const n = await e.json();
+import { jsx as g } from "react/jsx-runtime";
+import { useState as l, useRef as E, useEffect as u } from "react";
+import { ApiRoutes as b } from "../api/ApiRoutes.js";
+import { ImageBroken as y } from "./ImageBroken.js";
+import { useVxState as x } from "../stateHook/index.js";
+async function S(t, o = void 0) {
+  const r = await fetch(b.phosphor_icons(t, o));
+  if (!r.ok) {
+    const n = await r.json();
     throw new Error(n.message || "Unhandled error");
   }
-  const t = await e.blob();
-  if (t.type !== "image/svg+xml")
+  const e = await r.blob();
+  if (e.type !== "image/svg+xml")
     throw new Error("Unsupported file type");
-  return t;
+  return e;
 }
-async function x(o) {
-  return new Promise((r, e) => {
-    const t = new FileReader();
-    t.onload = () => {
-      r(t.result);
-    }, t.onerror = () => {
-      e(new Error("Error reading blob"));
-    }, t.readAsText(o);
+async function I(t) {
+  return new Promise((o, r) => {
+    const e = new FileReader();
+    e.onload = () => {
+      o(e.result);
+    }, e.onerror = () => {
+      r(new Error("Error reading blob"));
+    }, e.readAsText(t);
   });
 }
-function I(o) {
+function _(t) {
   return new DOMParser().parseFromString(
-    o,
+    t,
     "image/svg+xml"
   ).documentElement;
 }
-function S(o, r) {
-  o.setAttribute("fill", r);
+function R(t, o) {
+  t.setAttribute("fill", o);
 }
-const P = ({ iconName: o, iconStyle: r = void 0, size: e = 32, color: t = void 0 }) => {
-  const { getItem: n } = b(), [h, m] = a(!1), [c, u] = a(null), [f, g] = a(n("vx_ui_icons")), p = w(document.createElement("div"));
-  return l(() => {
-    r || g(n("vx_ui_icons"));
-  }, [n, r]), l(() => ((async () => {
-    m(!1);
+const j = ({
+  iconName: t,
+  style: o = void 0,
+  iconStyle: r = void 0,
+  size: e = 32,
+  color: n = void 0,
+  ...h
+}) => {
+  const c = x(), [w, f] = l(!1), [a, m] = l(null), [d, v] = l(c.get("vx_ui_icons")), p = E(document.createElement("div"));
+  return u(() => {
+    r || v(c.get("vx_ui_icons"));
+  }, [r, c]), u(() => ((async () => {
+    f(!1);
     try {
-      u(await y(o, r || f));
+      m(await S(t, r || d));
     } catch (s) {
-      console.error(s), m(!0);
+      console.error(s), f(!0);
     }
-  })(), () => u(null)), [o, r, f]), l(() => {
+  })(), () => m(null)), [t, r, d]), u(() => {
     const s = p.current;
-    return c && (async () => {
-      const i = I(await x(c));
-      t && S(i, t), e && (i.style.width = String(e), i.style.height = String(e)), s.appendChild(i.cloneNode(!0));
+    return a && (async () => {
+      const i = _(await I(a));
+      n && R(i, n), e && (i.style.width = String(e), i.style.height = String(e)), s.appendChild(i.cloneNode(!0));
     })(), () => {
       s.innerHTML = "";
     };
-  }, [c, e, t]), h ? /* @__PURE__ */ d(E, { size: e, color: "grey" }) : /* @__PURE__ */ d("div", { style: { width: e, height: e }, ref: p });
+  }, [a, e, n]), w ? /* @__PURE__ */ g(y, { size: e, color: "grey" }) : /* @__PURE__ */ g(
+    "div",
+    {
+      ...h,
+      style: { ...o, width: e, height: e },
+      ref: p
+    }
+  );
 };
 export {
-  P as PhosphorIcon
+  j as PhosphorIcon
 };

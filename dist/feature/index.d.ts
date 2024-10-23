@@ -1,18 +1,9 @@
 import { RouteItems } from '../router';
-import { GlobalStateType } from '../state';
-import { SocketEventHandler } from '../api';
-interface HandlerInfo {
-    name: string;
-    args?: any[];
-}
 export declare class Feature {
     static isInit: boolean;
     static featureName: string | undefined;
-    static init(routes: RouteItems): (featureName: string, gtkFonts: {
-        font_family: string;
-        font_family_monospace: string;
-    }, initialRoute: string, initialState: GlobalStateType) => import("react/jsx-runtime").JSX.Element;
-    static get names(): string[] | undefined;
+    static init(routes: RouteItems): () => import("react/jsx-runtime").JSX.Element;
+    static get names(): string[];
     static get Link(): import('react').FC<{
         route: string;
         children: React.ReactNode;
@@ -23,35 +14,40 @@ export declare class Feature {
             setRoute: import('react').Dispatch<import('react').SetStateAction<string>>;
         };
         readonly State: () => {
-            getItem: (key: string) => any;
-            setItem: (key: string, value: unknown) => void;
+            get: (key: string) => any;
+            set: (key: string, value: unknown) => void;
             save: () => void;
         };
-        Params(paths: string[]): {
-            params: Record<string, any>;
-            setParam: (paramPath: string, value: any) => () => void;
+        readonly Params: (paths: string[], feature?: string) => {
+            get: (path: string) => any;
+            set: (path: string, value: any) => () => void;
+            save: () => () => void;
         };
-        Frames(feature?: string): {
+        readonly Frames: (feature?: string) => {
             ids: string[];
             actives: string[];
             toggle: (frameId: string) => () => void;
             open: (frameId: string) => () => void;
             close: (frameId: string) => () => void;
         };
-        Task(handler: HandlerInfo): {
-            run: (args?: any[]) => () => void;
+        readonly Task: () => {
+            run: (name: string, args?: any[]) => () => void;
             afterRun: (callback: (data: any, error: any) => void) => void;
         };
-        Data(handlers: HandlerInfo[]): {
-            update: () => void;
-            data: Record<string, any>;
+        readonly Data: () => {
+            get: (key: string, handler?: {
+                name: string;
+                args?: any[];
+            }) => any;
+            stream: (key: string, handler?: {
+                name: string;
+                args?: any[];
+            }) => any;
+            setInterval: (value: number) => void;
         };
-        Stream(handlers: HandlerInfo[], interval?: number, auto?: boolean): {
-            data: Record<string, any>;
-            start: () => void;
-            stop: () => void;
+        readonly Menu: () => {
+            popup: (name: string) => () => void;
         };
-        Socket(name: string, auto?: boolean): SocketEventHandler;
+        readonly Socket: (name: string) => import('../api').SocketEventHandler;
     };
 }
-export {};

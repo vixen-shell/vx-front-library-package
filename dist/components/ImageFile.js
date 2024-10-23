@@ -1,17 +1,19 @@
-import { jsxs as m, jsx as r } from "react/jsx-runtime";
-import { ImageBroken as p } from "./ImageBroken.js";
-import { useImageFile as u } from "./hooks/index.js";
-const y = ({
+import { jsxs as c, jsx as r } from "react/jsx-runtime";
+import { ImageBroken as g } from "./ImageBroken.js";
+import { useImageFile as p } from "./hooks/index.js";
+const f = ({
   filePath: i,
+  style: n = void 0,
   width: e = void 0,
   height: o = void 0,
-  minWidth: n = void 0,
-  minHeight: l = void 0,
-  radius: t = 0,
-  fit: a = "fill"
+  minWidth: l = void 0,
+  minHeight: a = void 0,
+  radius: t = void 0,
+  fit: s = "fill",
+  ...m
 }) => {
-  const { url: d, error: s } = u(i);
-  return s ? /* @__PURE__ */ m(
+  const { url: d, error: u } = p(i);
+  return u ? /* @__PURE__ */ c(
     "div",
     {
       style: {
@@ -21,13 +23,13 @@ const y = ({
         flexDirection: "column",
         gap: "10px",
         border: "1px dashed grey",
-        borderRadius: `${t}px`,
+        borderRadius: t,
         width: e || "auto",
         height: o || "auto",
         padding: "10px"
       },
       children: [
-        /* @__PURE__ */ r(p, { size: 32, color: "grey" }),
+        /* @__PURE__ */ r(g, { size: 32, color: "grey" }),
         /* @__PURE__ */ r(
           "p",
           {
@@ -48,7 +50,7 @@ const y = ({
     {
       style: {
         backgroundColor: "#00000033",
-        borderRadius: `${t}px`,
+        borderRadius: t,
         width: e || "auto",
         height: o || "auto"
       }
@@ -56,11 +58,13 @@ const y = ({
   ) : /* @__PURE__ */ r(
     "img",
     {
+      ...m,
       style: {
-        borderRadius: `${t}px`,
-        objectFit: a,
-        minWidth: n || e || "auto",
-        minHeight: l || o || "auto"
+        ...n,
+        borderRadius: t,
+        objectFit: s,
+        minWidth: l || e || "auto",
+        minHeight: a || o || "auto"
       },
       width: e || "auto",
       height: o || "auto",
@@ -69,5 +73,5 @@ const y = ({
   );
 };
 export {
-  y as ImageFile
+  f as ImageFile
 };

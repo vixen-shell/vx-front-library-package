@@ -1,3 +1,3 @@
 export type { SocketEvent, SocketEventData, SocketEventHandler, } from './SocketEventHandler';
-export { useTask, useData, useStream, useSocket, useFrames, useParams, } from './hooks';
-export { Api } from './api';
+export { useTask, useData, useStream, useSocket, useFrames, useParams, useSystray, useMenu, useDbusMenu, } from './hooks';
+export { BaseApi } from './api';

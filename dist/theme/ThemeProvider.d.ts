@@ -1,9 +1,3 @@
-interface ThemeProviderProps {
-    fonts: {
-        font_family: string;
-        font_family_monospace: string;
-    };
+export declare const ThemeProvider: React.FC<{
     children: React.ReactNode;
-}
-export declare const ThemeProvider: React.FC<ThemeProviderProps>;
-export {};
+}>;

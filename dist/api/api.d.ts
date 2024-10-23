@@ -1,17 +1,27 @@
-import { SocketEventHandler } from './SocketEventHandler';
-import { GlobalStateType } from '../state';
-export declare class Api {
-    static featureNames: string[] | undefined;
-    static currentFeatureName: string | undefined;
-    private static _stateEvents;
-    private static _isInit;
-    static init(featureName: string): Promise<void>;
-    static get isInit(): boolean;
-    static ping(): Promise<boolean>;
-    static get stateEvents(): SocketEventHandler;
-    static getInitialState(): Promise<GlobalStateType>;
-    static getGtkFonts(): Promise<{
-        font_family: string;
-        font_family_monospace: string;
-    }>;
+import { SocketEventHandler, SocketEventData } from './SocketEventHandler';
+interface DefaultFonts {
+    font_family: string;
+    font_family_monospace: string;
 }
+export declare class BaseApi {
+    private static _isInit;
+    private static _features;
+    private static _initialState;
+    private static _stateEventHandler;
+    private static _defaultFonts;
+    static init(): Promise<void>;
+    static ping(): Promise<boolean>;
+    static get isInit(): boolean;
+    static get features(): string[];
+    static get urlParams(): {
+        feature: string;
+        frame: string;
+        route: string;
+    };
+    static get state(): {
+        initial: SocketEventData;
+        eventHandler: SocketEventHandler;
+    };
+    static get defaultFonts(): DefaultFonts;
+}
+export {};

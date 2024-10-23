@@ -1,14 +1,20 @@
 import { useTask as o } from "./task.js";
-import { useData as s } from "./data.js";
-import { useStream as a } from "./Stream.js";
+import { useData as t } from "./data.js";
+import { useStream as u } from "./Stream.js";
 import { useSocket as p } from "./socket.js";
-import { useFrames as x } from "./frames.js";
-import { useParams as S } from "./params.js";
+import { useFrames as a } from "./frames.js";
+import { useParams as k } from "./params.js";
+import { useSystray as y } from "./systray.js";
+import { useMenu as M } from "./menu.js";
+import { useDbusMenu as c } from "./dbusmenu.js";
 export {
-  s as useData,
-  x as useFrames,
-  S as useParams,
+  t as useData,
+  c as useDbusMenu,
+  a as useFrames,
+  M as useMenu,
+  k as useParams,
   p as useSocket,
-  a as useStream,
+  u as useStream,
+  y as useSystray,
   o as useTask
 };
