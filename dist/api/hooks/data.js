@@ -1,52 +1,52 @@
-import { useState as p, useCallback as m } from "react";
-import { BaseApi as u } from "../api.js";
-import { ApiRoutes as l } from "../ApiRoutes.js";
-import { useStream as d } from "./Stream.js";
-async function w(n, s) {
+import { useState as u, useCallback as f } from "react";
+import { BaseApi as p } from "../api.js";
+import { ApiRoutes as d } from "../ApiRoutes.js";
+import { useStream as w } from "./Stream.js";
+async function h(e, n) {
   const t = await fetch(
-    l.feature_data(u.urlParams.feature),
+    d.feature_data(p.urlParams.feature),
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(n),
-      signal: s
+      body: JSON.stringify(e),
+      signal: n
     }
   );
   if (!t.ok) {
-    const e = await t.json();
-    throw new Error(e.message);
+    const s = await t.json();
+    throw new Error(s.message);
   }
   return await t.json();
 }
-const b = () => {
-  const { stream: n, setInterval: s } = d(), [t, e] = p({}), i = m((a) => {
-    const o = new AbortController(), { signal: c } = o;
+const b = (e = { UseStream: !1 }) => {
+  const { stream: n } = w(e.UseStream, e.interval), [t, s] = u({}), i = f((a) => {
+    const r = new AbortController(), { signal: c } = r;
     (async () => {
       try {
-        const r = await w(a, c);
-        e((f) => ({ ...f, ...r }));
-      } catch (r) {
-        console.error(r);
+        const o = await h(a, c);
+        s((l) => ({ ...l, ...o }));
+      } catch (o) {
+        console.error(o);
       }
     })();
-  }, []);
-  return { get: m(
-    (a, o) => {
-      if (!(a in t) && o) {
-        e((r) => ({ ...r, [a]: void 0 }));
+  }, []), m = f(
+    (a, r) => {
+      if (!(a in t) && r) {
+        s((o) => ({ ...o, [a]: void 0 }));
         const c = {
           data_name: a,
-          handler_name: o.name,
-          handler_args: o.args
+          handler_name: r.name,
+          handler_args: r.args
         };
         i(c);
       }
-      return t[a] || void 0;
+      return t[a];
     },
     [t, i]
-  ), stream: n, setInterval: s };
+  );
+  return { get: m, stream: e.UseStream ? n : m };
 };
 export {
   b as useData

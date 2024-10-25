@@ -1,4 +1,7 @@
-export declare const useData: () => {
+export declare const useData: (options?: {
+    UseStream?: boolean;
+    interval?: number;
+}) => {
     get: (key: string, handler?: {
         name: string;
         args?: any[];
@@ -7,5 +10,4 @@ export declare const useData: () => {
         name: string;
         args?: any[];
     }) => any;
-    setInterval: (value: number) => void;
 };

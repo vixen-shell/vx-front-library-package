@@ -38,7 +38,10 @@ export declare class Feature {
             run: (name: string, args?: any[]) => () => void;
             afterRun: (callback: (data: any, error: any) => void) => void;
         };
-        readonly Data: () => {
+        readonly Data: (options?: {
+            UseStream?: boolean;
+            interval?: number;
+        }) => {
             get: (key: string, handler?: {
                 name: string;
                 args?: any[];
@@ -47,7 +50,6 @@ export declare class Feature {
                 name: string;
                 args?: any[];
             }) => any;
-            setInterval: (value: number) => void;
         };
         readonly Menu: () => {
             popup: (name: string) => () => void;
