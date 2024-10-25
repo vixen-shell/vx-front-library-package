@@ -1,9 +1,13 @@
 import { RouteItems } from '../router';
 export declare class Feature {
     static isInit: boolean;
-    static featureName: string | undefined;
     static init(routes: RouteItems): () => import("react/jsx-runtime").JSX.Element;
     static get names(): string[];
+    static get current(): {
+        feature: string;
+        frame: string;
+        route: string;
+    };
     static get Link(): import('react').FC<{
         route: string;
         children: React.ReactNode;
