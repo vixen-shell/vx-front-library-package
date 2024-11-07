@@ -24,4 +24,6 @@ export declare class ApiRoutes {
     static frame_toggle(featureName: string, frameId: string): string;
     static frame_open(featureName: string, frameId: string): string;
     static frame_close(featureName: string, frameId: string): string;
+    static popup_frame_show(featureName: string): string;
+    static readonly popup_frame_hide: string;
 }

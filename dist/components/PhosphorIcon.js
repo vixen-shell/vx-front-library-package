@@ -1,9 +1,9 @@
 import { jsx as g } from "react/jsx-runtime";
 import { useState as l, useRef as E, useEffect as u } from "react";
 import { ApiRoutes as b } from "../api/ApiRoutes.js";
-import { ImageBroken as y } from "./ImageBroken.js";
-import { useVxState as x } from "../stateHook/index.js";
-async function S(t, o = void 0) {
+import { ImageBroken as x } from "./ImageBroken.js";
+import { useVxState as y } from "../stateHook/index.js";
+async function _(t, o = void 0) {
   const r = await fetch(b.phosphor_icons(t, o));
   if (!r.ok) {
     const n = await r.json();
@@ -14,7 +14,7 @@ async function S(t, o = void 0) {
     throw new Error("Unsupported file type");
   return e;
 }
-async function I(t) {
+async function S(t) {
   return new Promise((o, r) => {
     const e = new FileReader();
     e.onload = () => {
@@ -24,7 +24,7 @@ async function I(t) {
     }, e.readAsText(t);
   });
 }
-function _(t) {
+function I(t) {
   return new DOMParser().parseFromString(
     t,
     "image/svg+xml"
@@ -41,25 +41,25 @@ const j = ({
   color: n = void 0,
   ...h
 }) => {
-  const c = x(), [w, f] = l(!1), [a, m] = l(null), [d, v] = l(c.get("vx_ui_icons")), p = E(document.createElement("div"));
+  const c = y(), [v, f] = l(!1), [a, m] = l(null), [d, w] = l(c.get.vx_ui_icons), p = E(document.createElement("div"));
   return u(() => {
-    r || v(c.get("vx_ui_icons"));
-  }, [r, c]), u(() => ((async () => {
+    r || w(c.get.vx_ui_icons);
+  }, [r, c.get.vx_ui_icons]), u(() => ((async () => {
     f(!1);
     try {
-      m(await S(t, r || d));
+      m(await _(t, r || d));
     } catch (s) {
       console.error(s), f(!0);
     }
   })(), () => m(null)), [t, r, d]), u(() => {
     const s = p.current;
     return a && (async () => {
-      const i = _(await I(a));
+      const i = I(await S(a));
       n && R(i, n), e && (i.style.width = String(e), i.style.height = String(e)), s.appendChild(i.cloneNode(!0));
     })(), () => {
       s.innerHTML = "";
     };
-  }, [a, e, n]), w ? /* @__PURE__ */ g(y, { size: e, color: "grey" }) : /* @__PURE__ */ g(
+  }, [a, e, n]), v ? /* @__PURE__ */ g(x, { size: e, color: "grey" }) : /* @__PURE__ */ g(
     "div",
     {
       ...h,

@@ -7,6 +7,7 @@ export declare class Feature {
         feature: string;
         frame: string;
         route: string;
+        popup: boolean;
     };
     static get Link(): import('react').FC<{
         route: string;
@@ -18,9 +19,11 @@ export declare class Feature {
             setRoute: import('react').Dispatch<import('react').SetStateAction<string>>;
         };
         readonly State: () => {
-            get: (key: string) => any;
+            readonly get: import('../api').SocketEventData;
+            getCopy: (key: string) => any;
             set: (key: string, value: unknown) => void;
             save: () => void;
+            saveItem: (key: string) => void;
         };
         readonly Params: (paths: string[], feature?: string) => {
             get: (path: string) => any;
@@ -53,6 +56,30 @@ export declare class Feature {
         };
         readonly Menu: () => {
             popup: (name: string) => () => void;
+        };
+        readonly PopupFrame: () => {
+            show: ({ route, monitorId, position, size, resizable, exitOnMouseLeave, }: {
+                route: string;
+                monitorId?: number;
+                position?: {
+                    x: number;
+                    y: number;
+                };
+                size?: {
+                    width: number;
+                    height: number;
+                };
+                resizable?: boolean;
+                exitOnMouseLeave?: boolean;
+            }) => void;
+            hide: () => void;
+            onHiding: (callback: (position: {
+                x: number;
+                y: number;
+            } | null, size: {
+                width: number;
+                height: number;
+            } | null) => void) => void;
         };
         readonly Socket: (name: string) => import('../api').SocketEventHandler;
     };
