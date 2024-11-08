@@ -1,7 +1,7 @@
 import { jsx as B, Fragment as tt, jsxs as et } from "react/jsx-runtime";
 import * as C from "react";
 import it, { useRef as U, useState as st, useEffect as rt } from "react";
-import { usePopupFrame as ot } from "../api/hooks/popup.js";
+import { useHidePopupFrame as ot } from "./PopupHooks.js";
 import { useVxState as nt } from "../stateHook/index.js";
 import { Paper as G } from "@mantine/core";
 import { flushSync as at } from "react-dom";

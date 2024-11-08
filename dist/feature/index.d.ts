@@ -21,13 +21,13 @@ export declare class Feature {
         readonly State: () => {
             readonly get: import('../api').SocketEventData;
             getCopy: (key: string) => any;
-            set: (key: string, value: unknown) => void;
+            set: (key: string, value: any | ((prevValue: any) => any)) => void;
             save: () => void;
             saveItem: (key: string) => void;
         };
         readonly Params: (paths: string[], feature?: string) => {
             get: (path: string) => any;
-            set: (path: string, value: any) => () => void;
+            set: (path: string, value: any | ((prevValue: any) => any)) => () => void;
             save: () => () => void;
         };
         readonly Frames: (feature?: string) => {
@@ -72,11 +72,10 @@ export declare class Feature {
                 resizable?: boolean;
                 exitOnMouseLeave?: boolean;
             }) => void;
-            hide: () => void;
-            onHiding: (callback: (position: {
+            onClosing: (callback: (lastPosition: {
                 x: number;
                 y: number;
-            } | null, size: {
+            } | null, lastSize: {
                 width: number;
                 height: number;
             } | null) => void) => void;

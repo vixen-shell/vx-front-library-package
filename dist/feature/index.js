@@ -13,7 +13,7 @@ import { useSocket as l } from "../api/hooks/socket.js";
 import { useFrames as k } from "../api/hooks/frames.js";
 import { useParams as P } from "../api/hooks/params.js";
 import { useMenu as S } from "../api/hooks/menu.js";
-import { usePopupFrame as R } from "../api/hooks/popup.js";
+import { usePopupFrame as R } from "./PopupHooks.js";
 import F from "./FeatureRender.js";
 function t(o, i) {
   if (!a.isInit)

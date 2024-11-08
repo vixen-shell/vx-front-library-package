@@ -1,80 +1,80 @@
-import { useState as y, useCallback as c, useEffect as h } from "react";
-import { BaseApi as d } from "../api.js";
+import { useState as h, useCallback as c, useEffect as d } from "react";
+import { BaseApi as j } from "../api.js";
 import { ApiRoutes as m } from "../ApiRoutes.js";
-const A = (l, s = d.urlParams.feature) => {
-  const [n, f] = y({}), i = c((r, o) => {
-    f((e) => ({ ...e, [r]: o }));
-  }, []), w = c(
-    (r) => {
-      const o = new AbortController(), { signal: e } = o;
+const C = (l, n = j.urlParams.feature) => {
+  const [s, w] = h({}), i = c((o, r) => {
+    w((e) => ({ ...e, [o]: r }));
+  }, []), f = c(
+    (o) => {
+      const r = new AbortController(), { signal: e } = r;
       return (async () => {
         try {
           const t = await fetch(
-            m.feature_get_param(s, r),
+            m.feature_get_param(n, o),
             { signal: e }
           );
           if (!t.ok) {
             const a = await t.json();
             throw new Error(a.message);
           }
-          i(r, (await t.json())[r]);
+          i(o, (await t.json())[o]);
         } catch (t) {
           console.error(t);
         }
-      })(), () => o.abort();
+      })(), () => r.abort();
     },
-    [s, i]
-  ), p = c(
-    (r) => n[r],
-    [n]
+    [n, i]
+  ), u = c(
+    (o) => s[o],
+    [s]
   ), g = c(
-    (r, o) => {
-      if (!(r in n))
+    (o, r) => {
+      if (!(o in s))
         throw new Error("Parameter path not found");
       const e = new AbortController(), { signal: t } = e;
       return (async () => {
         try {
-          const a = await fetch(
-            m.feature_set_param(s, r),
+          const a = typeof r == "function" ? r(s[o]) : r, p = await fetch(
+            m.feature_set_param(n, o),
             {
               method: "POST",
               headers: {
                 "Content-Type": "application/json"
               },
-              body: JSON.stringify({ value: o }),
+              body: JSON.stringify({ value: a }),
               signal: t
             }
           );
-          if (!a.ok) {
-            const b = await a.json();
+          if (!p.ok) {
+            const b = await p.json();
             throw new Error(b.message);
           }
-          i(r, o);
+          i(o, a);
         } catch (a) {
           console.error(a);
         }
       })(), () => e.abort();
     },
-    [s, n, i]
-  ), u = c(() => {
-    const r = new AbortController(), { signal: o } = r;
+    [n, s, i]
+  ), y = c(() => {
+    const o = new AbortController(), { signal: r } = o;
     return (async () => {
       const e = await fetch(
-        m.feature_save_params(s),
-        { signal: o }
+        m.feature_save_params(n),
+        { signal: r }
       );
       if (!e.ok) {
         const t = await e.json();
         console.error(t.message);
       }
-    })(), () => r.abort();
-  }, [s]);
-  return h(() => {
-    Object.keys(n).length < l.length && l.forEach((r) => {
-      w(r);
+    })(), () => o.abort();
+  }, [n]);
+  return d(() => {
+    Object.keys(s).length < l.length && l.forEach((o) => {
+      f(o);
     });
-  }, [w, n, l]), { get: p, set: g, save: u };
+  }, [f, s, l]), { get: u, set: g, save: y };
 };
 export {
-  A as useParams
+  C as useParams
 };

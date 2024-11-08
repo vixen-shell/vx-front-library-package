@@ -1,3 +1,6 @@
+export declare const useHidePopupFrame: () => {
+    hide: () => void;
+};
 export declare const usePopupFrame: () => {
     show: ({ route, monitorId, position, size, resizable, exitOnMouseLeave, }: {
         route: string;
@@ -13,11 +16,10 @@ export declare const usePopupFrame: () => {
         resizable?: boolean;
         exitOnMouseLeave?: boolean;
     }) => void;
-    hide: () => void;
-    onHiding: (callback: (position: {
+    onClosing: (callback: (lastPosition: {
         x: number;
         y: number;
-    } | null, size: {
+    } | null, lastSize: {
         width: number;
         height: number;
     } | null) => void) => void;

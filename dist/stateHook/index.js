@@ -1,27 +1,30 @@
 import { useContext as r } from "react";
 import { GlobalStateContext as a } from "../state/index.js";
-import { BaseApi as e } from "../api/api.js";
+import { BaseApi as o } from "../api/api.js";
 import "../api/ApiRoutes.js";
-const f = () => {
-  const n = r(a);
-  if (!n) throw new Error("The state provider is not available");
-  const { state: s } = n;
+const l = () => {
+  const s = r(a);
+  if (!s) throw new Error("The state provider is not available");
+  const { state: e } = s;
   return {
     get get() {
-      return s;
+      return e;
     },
-    getCopy: (t) => JSON.parse(JSON.stringify(s[t])),
-    set: (t, o) => {
-      e.state.eventHandler.send_event({
+    getCopy: (t) => JSON.parse(JSON.stringify(e[t])),
+    set: (t, n) => {
+      o.state.eventHandler.send_event({
         id: "SET",
-        data: { key: t, value: o }
+        data: {
+          key: t,
+          value: typeof n == "function" ? n(e[t]) : n
+        }
       });
     },
     save: () => {
-      e.state.eventHandler.send_event({ id: "SAVE" });
+      o.state.eventHandler.send_event({ id: "SAVE" });
     },
     saveItem: (t) => {
-      e.state.eventHandler.send_event({
+      o.state.eventHandler.send_event({
         id: "SAVE_ITEM",
         data: { key: t }
       });
@@ -29,5 +32,5 @@ const f = () => {
   };
 };
 export {
-  f as useVxState
+  l as useVxState
 };
