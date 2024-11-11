@@ -1,5 +1,5 @@
 import { jsx as m } from "react/jsx-runtime";
-import '../assets/styles.css';/* empty css                 */
+import '../assets/styles.css';import '../assets/ThemeProvider.css';/* empty css                 */
 import { MantineProvider as r, createTheme as i } from "@mantine/core";
 import { useEffect as a } from "react";
 import { BaseApi as e } from "../api/api.js";
