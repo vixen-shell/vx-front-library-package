@@ -1,30 +1,28 @@
-import { useContext as r } from "react";
-import { GlobalStateContext as a } from "../state/index.js";
-import { BaseApi as o } from "../api/api.js";
+import { useContext as s } from "react";
+import { GlobalStateContext as r } from "../state/index.js";
+import { BaseApi as n } from "../api/api.js";
 import "../api/ApiRoutes.js";
-const l = () => {
-  const s = r(a);
-  if (!s) throw new Error("The state provider is not available");
-  const { state: e } = s;
+const I = () => {
+  const o = s(r);
+  if (!o) throw new Error("The state provider is not available");
+  const { state: e } = o;
   return {
-    get get() {
-      return e;
-    },
-    getCopy: (t) => JSON.parse(JSON.stringify(e[t])),
-    set: (t, n) => {
-      o.state.eventHandler.send_event({
+    state: e,
+    getStateItemCopy: (t) => JSON.parse(JSON.stringify(e[t])),
+    setStateItem: (t, a) => {
+      n.state.eventHandler.send_event({
         id: "SET",
         data: {
           key: t,
-          value: typeof n == "function" ? n(e[t]) : n
+          value: typeof a == "function" ? a(e[t]) : a
         }
       });
     },
-    save: () => {
-      o.state.eventHandler.send_event({ id: "SAVE" });
+    saveState: () => {
+      n.state.eventHandler.send_event({ id: "SAVE" });
     },
-    saveItem: (t) => {
-      o.state.eventHandler.send_event({
+    saveStateItem: (t) => {
+      n.state.eventHandler.send_event({
         id: "SAVE_ITEM",
         data: { key: t }
       });
@@ -32,5 +30,5 @@ const l = () => {
   };
 };
 export {
-  l as useVxState
+  I as useVxState
 };

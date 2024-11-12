@@ -1,4 +1,4 @@
-import { jsx as g } from "react/jsx-runtime";
+import { jsx as h } from "react/jsx-runtime";
 import { useState as l, useRef as E, useEffect as u } from "react";
 import { ApiRoutes as b } from "../api/ApiRoutes.js";
 import { ImageBroken as x } from "./ImageBroken.js";
@@ -39,12 +39,12 @@ const j = ({
   iconStyle: r = void 0,
   size: e = 32,
   color: n = void 0,
-  ...h
+  ...g
 }) => {
-  const c = y(), [v, f] = l(!1), [a, m] = l(null), [d, w] = l(c.get.vx_ui_icons), p = E(document.createElement("div"));
+  const { state: c } = y(), [v, f] = l(!1), [a, m] = l(null), [d, w] = l(c.vx_ui_icons), p = E(document.createElement("div"));
   return u(() => {
-    r || w(c.get.vx_ui_icons);
-  }, [r, c.get.vx_ui_icons]), u(() => ((async () => {
+    r || w(c.vx_ui_icons);
+  }, [r, c.vx_ui_icons]), u(() => ((async () => {
     f(!1);
     try {
       m(await _(t, r || d));
@@ -59,10 +59,10 @@ const j = ({
     })(), () => {
       s.innerHTML = "";
     };
-  }, [a, e, n]), v ? /* @__PURE__ */ g(x, { size: e, color: "grey" }) : /* @__PURE__ */ g(
+  }, [a, e, n]), v ? /* @__PURE__ */ h(x, { size: e, color: "grey" }) : /* @__PURE__ */ h(
     "div",
     {
-      ...h,
+      ...g,
       style: { ...o, width: e, height: e },
       ref: p
     }

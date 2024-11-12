@@ -1,10 +1,10 @@
-import { useRef as _, useEffect as m } from "react";
-import { BaseApi as d } from "../api/api.js";
-import { ApiRoutes as s } from "../api/ApiRoutes.js";
-import { useVxState as n } from "../stateHook/index.js";
-async function h(o) {
+import { useRef as _, useEffect as d } from "react";
+import { BaseApi as h } from "../api/api.js";
+import { ApiRoutes as n } from "../api/ApiRoutes.js";
+import { useVxState as p } from "../stateHook/index.js";
+async function w(o) {
   const e = await fetch(
-    s.popup_frame_show(d.urlParams.feature),
+    n.popup_frame_show(h.urlParams.feature),
     {
       method: "POST",
       headers: {
@@ -19,61 +19,61 @@ async function h(o) {
   }
   return await e.json();
 }
-async function w() {
-  const o = await fetch(s.popup_frame_hide);
+async function v() {
+  const o = await fetch(n.popup_frame_hide);
   if (!o.ok) {
     const e = await o.json();
     throw new Error(e.message);
   }
   return await o.json();
 }
-const k = () => {
-  const o = n();
+const P = () => {
+  const { state: o, setStateItem: e } = p();
   return { hide: () => {
-    o.get.vx_popup_frame && (async () => {
+    o.vx_popup_frame && (async () => {
       try {
-        await w(), o.set("vx_popup_frame", null);
-      } catch (r) {
-        console.error(r);
-      }
-    })();
-  } };
-}, b = () => {
-  const o = n(), e = _(), r = ({
-    route: t,
-    monitorId: i = void 0,
-    position: c = void 0,
-    size: u = void 0,
-    resizable: f = !1,
-    exitOnMouseLeave: l = !1
-  }) => {
-    o.get.vx_popup_frame || (o.set("vx_popup_frame", {
-      position: c || null,
-      size: u || null,
-      resizable: f,
-      exit_on_leave: l
-    }), (async () => {
-      try {
-        await h({
-          route: t,
-          monitor_id: i || 0
-        });
+        await v(), e("vx_popup_frame", null);
       } catch (a) {
         console.error(a);
       }
+    })();
+  } };
+}, g = () => {
+  const { state: o, setStateItem: e } = p(), r = _(), a = ({
+    route: t,
+    monitorId: c = void 0,
+    position: u = void 0,
+    size: f = void 0,
+    resizable: l = !1,
+    exitOnMouseLeave: m = !1
+  }) => {
+    o.vx_popup_frame || (e("vx_popup_frame", {
+      position: u || null,
+      size: f || null,
+      resizable: l,
+      exit_on_leave: m
+    }), (async () => {
+      try {
+        await w({
+          route: t,
+          monitor_id: c || 0
+        });
+      } catch (s) {
+        console.error(s);
+      }
     })());
-  }, p = (t) => {
-    e.current = t;
+  }, i = (t) => {
+    r.current = t;
   };
-  return m(() => {
-    const t = o.get.vx_popup_frame_callback_data;
-    t && (e.current && e.current(
+  return d(() => {
+    const t = o.vx_popup_frame_callback_data;
+    t && (r.current && r.current(
       t.position,
       t.size
-    ), o.set("vx_popup_frame_callback_data", null));
-  }, [o.get.vx_popup_frame_callback_data]), { show: r, onClosing: p };
+    ), e("vx_popup_frame_callback_data", null));
+  }, [o.vx_popup_frame_callback_data]), { show: a, onClosing: i };
 };
 export {
-  k as useHidePopupFrame,
-  b as usePopupFrame
+  P as useHidePopupFrame,
+  g as usePopupFrame
 };

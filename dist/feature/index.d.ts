@@ -19,11 +19,11 @@ export declare class Feature {
             setRoute: import('react').Dispatch<import('react').SetStateAction<string>>;
         };
         readonly State: () => {
-            readonly get: import('../api').SocketEventData;
-            getCopy: (key: string) => any;
-            set: (key: string, value: any | ((prevValue: any) => any)) => void;
-            save: () => void;
-            saveItem: (key: string) => void;
+            state: import('../api').SocketEventData;
+            getStateItemCopy: (key: string) => any;
+            setStateItem: (key: string, value: any | ((prevValue: any) => any)) => void;
+            saveState: () => void;
+            saveStateItem: (key: string) => void;
         };
         readonly Params: (paths: string[], feature?: string) => {
             get: (path: string) => any;
