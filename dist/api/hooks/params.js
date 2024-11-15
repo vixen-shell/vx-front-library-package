@@ -1,7 +1,7 @@
 import { useState as h, useCallback as c, useEffect as d } from "react";
 import { BaseApi as j } from "../api.js";
 import { ApiRoutes as m } from "../ApiRoutes.js";
-const C = (l, n = j.urlParams.feature) => {
+const C = (l = [], n = j.urlParams.feature) => {
   const [s, w] = h({}), i = c((o, r) => {
     w((e) => ({ ...e, [o]: r }));
   }, []), f = c(
