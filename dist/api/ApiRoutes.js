@@ -1,6 +1,6 @@
-function e(p, t) {
+function e(c, t) {
   const [a, s] = ["localhost", "6481"];
-  return `${p}://${a}:${s}${t}`;
+  return `${c}://${a}:${s}${t}`;
 }
 const r = class r {
   static system_icons(t) {
@@ -77,7 +77,7 @@ const r = class r {
     return e("http", `/popup_frame/${t}/show`);
   }
 };
-r.ping = e("http", "/ping"), r.shutdown = e("http", "/shutdown"), r.gtk_fonts = e("http", "/gtk_fonts"), r.vx_state = e("http", "/vx_state"), r.features_names = e("http", "/features/names"), r.popup_frame_hide = e("http", "/popup_frame/hide");
+r.ping = e("http", "/ping"), r.shutdown = e("http", "/shutdown"), r.gtk_fonts = e("http", "/gtk_fonts"), r.locale = e("http", "/locale"), r.vx_state = e("http", "/vx_state"), r.features_names = e("http", "/features/names"), r.popup_frame_hide = e("http", "/popup_frame/hide");
 let u = r;
 export {
   u as ApiRoutes

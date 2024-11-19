@@ -1,10 +1,11 @@
 import "react/jsx-runtime";
 import '../assets/styles.css';/* empty css                 */
-import { c } from "../index-cOzKLSnp.js";
+import "../theme/locale.js";
+import { c as f } from "../index-BEpVKYln.js";
 import "../components/ErrorFrame.js";
 import "react";
 import "../api/api.js";
 import "../api/ApiRoutes.js";
 export {
-  c as create
+  f as create
 };

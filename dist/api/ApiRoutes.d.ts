@@ -2,6 +2,7 @@ export declare class ApiRoutes {
     static readonly ping: string;
     static readonly shutdown: string;
     static readonly gtk_fonts: string;
+    static readonly locale: string;
     static readonly vx_state: string;
     static system_icons(iconName: string): string;
     static phosphor_icons(iconName: string, iconStyle?: 'bold' | 'duotone' | 'fill' | 'light' | 'regular' | 'thin' | undefined): string;

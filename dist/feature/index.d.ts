@@ -2,6 +2,7 @@ import { RouteItems } from '../router';
 export declare class Feature {
     static isInit: boolean;
     static init(routes: RouteItems): () => import("react/jsx-runtime").JSX.Element;
+    static get locale(): string;
     static get names(): string[];
     static get current(): {
         feature: string;
@@ -81,5 +82,6 @@ export declare class Feature {
             } | null) => void) => void;
         };
         readonly Socket: (name: string) => import('../api').SocketEventHandler;
+        readonly Locales: () => (locale: string, data?: (string | number)[]) => string;
     };
 }

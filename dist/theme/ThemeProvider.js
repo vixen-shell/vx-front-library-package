@@ -1,16 +1,17 @@
-import { jsx as m } from "react/jsx-runtime";
+import { jsx as t } from "react/jsx-runtime";
 import '../assets/styles.css';import '../assets/ThemeProvider.css';/* empty css                 */
-import { MantineProvider as r, createTheme as i } from "@mantine/core";
+import { MantineProvider as m, createTheme as i } from "@mantine/core";
 import { useEffect as a } from "react";
 import { BaseApi as e } from "../api/api.js";
 import "../api/ApiRoutes.js";
-import { useVxState as f } from "../stateHook/index.js";
-const v = ({ children: t }) => {
-  const { state: o } = f();
+import { useVxState as l } from "../stateHook/index.js";
+import { DatesProvider as f } from "@mantine/dates";
+const x = ({ children: r }) => {
+  const { state: o } = l();
   return a(() => {
     document.documentElement.style.zoom = String(o.vx_ui_scale);
-  }, [o.vx_ui_scale]), /* @__PURE__ */ m(
-    r,
+  }, [o.vx_ui_locale, o.vx_ui_scale]), /* @__PURE__ */ t(
+    m,
     {
       theme: i({
         fontFamily: o.vx_ui_font_family || e.defaultFonts.font_family,
@@ -19,10 +20,10 @@ const v = ({ children: t }) => {
       }),
       defaultColorScheme: "auto",
       forceColorScheme: o.vx_ui_color_scheme || void 0,
-      children: t
+      children: /* @__PURE__ */ t(f, { settings: { locale: e.locale(!0) }, children: r })
     }
   );
 };
 export {
-  v as ThemeProvider
+  x as ThemeProvider
 };

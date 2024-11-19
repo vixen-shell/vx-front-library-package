@@ -9,6 +9,8 @@ export declare class BaseApi {
     private static _initialState;
     private static _stateEventHandler;
     private static _defaultFonts;
+    private static _locale;
+    private static _locales;
     static init(): Promise<void>;
     static ping(): Promise<boolean>;
     static get isInit(): boolean;
@@ -24,5 +26,9 @@ export declare class BaseApi {
         eventHandler: SocketEventHandler;
     };
     static get defaultFonts(): DefaultFonts;
+    static get locales(): {
+        [key: string]: string;
+    };
+    static locale(dayjs?: boolean): string;
 }
 export {};
