@@ -1,11 +1,11 @@
-import { useContext as s } from "react";
+import { useContext as o } from "react";
 import { GlobalStateContext as r } from "../state/index.js";
 import { BaseApi as n } from "../api/api.js";
 import "../api/ApiRoutes.js";
 const I = () => {
-  const o = s(r);
-  if (!o) throw new Error("The state provider is not available");
-  const { state: e } = o;
+  const s = o(r);
+  if (!s) throw new Error("The state provider is not available");
+  const { state: e } = s;
   return {
     state: e,
     getStateItemCopy: (t) => JSON.parse(JSON.stringify(e[t])),
@@ -21,10 +21,10 @@ const I = () => {
     saveState: () => {
       n.state.eventHandler.send_event({ id: "SAVE" });
     },
-    saveStateItem: (t) => {
+    saveStateItems: (t) => {
       n.state.eventHandler.send_event({
-        id: "SAVE_ITEM",
-        data: { key: t }
+        id: "SAVE_ITEMS",
+        data: { keys: t }
       });
     }
   };

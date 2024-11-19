@@ -24,7 +24,7 @@ export declare class Feature {
             getStateItemCopy: (key: string) => any;
             setStateItem: (key: string, value: any | ((prevValue: any) => any)) => void;
             saveState: () => void;
-            saveStateItem: (key: string) => void;
+            saveStateItems: (keys: string[]) => void;
         };
         readonly Params: (paths?: string[], feature?: string) => {
             get: (path: string) => any;

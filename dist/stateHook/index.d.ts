@@ -3,5 +3,5 @@ export declare const useVxState: () => {
     getStateItemCopy: (key: string) => any;
     setStateItem: (key: string, value: any | ((prevValue: any) => any)) => void;
     saveState: () => void;
-    saveStateItem: (key: string) => void;
+    saveStateItems: (keys: string[]) => void;
 };
