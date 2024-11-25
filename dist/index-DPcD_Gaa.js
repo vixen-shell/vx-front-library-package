@@ -1,12 +1,13 @@
 import { jsx as f } from "react/jsx-runtime";
 import './assets/styles.css';/* empty css                */
 import { dayjsLocaleImporters as y } from "./theme/locale.js";
-import E from "react-dom";
-import { ErrorFrame as p } from "./components/ErrorFrame.js";
+import p from "react-dom";
+import { ErrorFrame as E } from "./components/ErrorFrame.js";
 import "react";
 import { BaseApi as a } from "./api/api.js";
 import "./api/ApiRoutes.js";
-var i = {}, n = E;
+import "dayjs";
+var i = {}, n = p;
 if (process.env.NODE_ENV === "production")
   i.createRoot = n.createRoot, i.hydrateRoot = n.hydrateRoot;
 else {
@@ -28,7 +29,7 @@ else {
   };
 }
 function _(e) {
-  const o = (t) => /* @__PURE__ */ f(p, { message: t });
+  const o = (t) => /* @__PURE__ */ f(E, { message: t });
   async function u(t) {
     try {
       const r = (await t(a.urlParams.feature)).default;
@@ -60,11 +61,11 @@ function _(e) {
   }
   return { render: m };
 }
-const C = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const N = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   create: _
 }, Symbol.toStringTag, { value: "Module" }));
 export {
   _ as c,
-  C as i
+  N as i
 };

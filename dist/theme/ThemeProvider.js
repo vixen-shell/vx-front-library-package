@@ -4,9 +4,10 @@ import { MantineProvider as m, createTheme as i } from "@mantine/core";
 import { useEffect as a } from "react";
 import { BaseApi as e } from "../api/api.js";
 import "../api/ApiRoutes.js";
+import "dayjs";
 import { useVxState as l } from "../stateHook/index.js";
 import { DatesProvider as f } from "@mantine/dates";
-const x = ({ children: r }) => {
+const y = ({ children: r }) => {
   const { state: o } = l();
   return a(() => {
     document.documentElement.style.zoom = String(o.vx_ui_scale);
@@ -25,5 +26,5 @@ const x = ({ children: r }) => {
   );
 };
 export {
-  x as ThemeProvider
+  y as ThemeProvider
 };

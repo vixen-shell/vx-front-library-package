@@ -83,5 +83,9 @@ export declare class Feature {
         };
         readonly Socket: (name: string) => import('../api').SocketEventHandler;
         readonly Locales: () => (locale: string, data?: (string | number)[]) => string;
+        readonly Time: (defaultFormat?: string, stream?: boolean) => {
+            time: string;
+            now: (format?: string | undefined) => string;
+        };
     };
 }

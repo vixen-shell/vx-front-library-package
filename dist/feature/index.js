@@ -1,6 +1,6 @@
-import { jsx as s } from "react/jsx-runtime";
-import { Routes as u } from "../router/router.js";
-import { useRouter as m } from "../router/hook.js";
+import { jsx as m } from "react/jsx-runtime";
+import { Routes as s } from "../router/router.js";
+import { useRouter as u } from "../router/hook.js";
 import { Link as n } from "../router/Link.js";
 import { GlobalState as f } from "../state/index.js";
 import { useVxState as p } from "../stateHook/index.js";
@@ -14,18 +14,19 @@ import { useFrames as k } from "../api/hooks/frames.js";
 import { useParams as P } from "../api/hooks/params.js";
 import { useMenu as S } from "../api/hooks/menu.js";
 import { useLocales as L } from "../api/hooks/locales.js";
-import { usePopupFrame as R } from "./PopupHooks.js";
+import { useTime as R } from "../api/hooks/time.js";
+import { usePopupFrame as T } from "./PopupHooks.js";
 import F from "./FeatureRender.js";
-function t(o, a) {
-  if (!i.isInit)
+function t(o, i) {
+  if (!a.isInit)
     throw new Error(`Cannot use '${o}' before feature initialization`);
-  return a;
+  return i;
 }
 const r = class r {
-  static init(a) {
+  static init(i) {
     if (r.isInit)
       throw new Error("Feature is already initialized");
-    return u.define(a), () => (r.isInit = !0, f.initialState = e.state.initial, /* @__PURE__ */ s(F, { initialRoute: e.urlParams.route }));
+    return s.define(i), () => (r.isInit = !0, f.initialState = e.state.initial, /* @__PURE__ */ m(F, { initialRoute: e.urlParams.route }));
   }
   static get locale() {
     return t("locale", e.locale());
@@ -42,7 +43,7 @@ const r = class r {
 };
 r.isInit = !1, r.Use = {
   get Router() {
-    return t("Router", m);
+    return t("Router", u);
   },
   get State() {
     return t("State", p);
@@ -63,16 +64,19 @@ r.isInit = !1, r.Use = {
     return t("Menu", S);
   },
   get PopupFrame() {
-    return t("PopupFrame", R);
+    return t("PopupFrame", T);
   },
   get Socket() {
     return t("Socket", g);
   },
   get Locales() {
     return t("Locales", L);
+  },
+  get Time() {
+    return t("Time", R);
   }
 };
-let i = r;
+let a = r;
 export {
-  i as Feature
+  a as Feature
 };

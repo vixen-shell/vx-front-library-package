@@ -2,7 +2,8 @@ import { useContext as o } from "react";
 import { GlobalStateContext as r } from "../state/index.js";
 import { BaseApi as n } from "../api/api.js";
 import "../api/ApiRoutes.js";
-const I = () => {
+import "dayjs";
+const l = () => {
   const s = o(r);
   if (!s) throw new Error("The state provider is not available");
   const { state: e } = s;
@@ -30,5 +31,5 @@ const I = () => {
   };
 };
 export {
-  I as useVxState
+  l as useVxState
 };

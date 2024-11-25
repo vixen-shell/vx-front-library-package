@@ -1,11 +1,12 @@
-import { jsx as n, Fragment as c } from "react/jsx-runtime";
+import { jsx as i, Fragment as c } from "react/jsx-runtime";
 import { useRef as u, useEffect as p } from "react";
 import "../api/api.js";
 import "../api/ApiRoutes.js";
 import { useSystray as f } from "../api/hooks/systray.js";
 import { useDbusMenu as m } from "../api/hooks/dbusmenu.js";
+import "dayjs";
 import { SystemIcon as v } from "./SystemIcon.js";
-const y = ({ item: t, iconSize: i, tooltip: a = !1 }) => {
+const y = ({ item: t, iconSize: n, tooltip: a = !1 }) => {
   const l = m(t.service_name), s = u(null);
   return p(() => {
     if (!s.current) return;
@@ -20,35 +21,35 @@ const y = ({ item: t, iconSize: i, tooltip: a = !1 }) => {
     return () => {
       r && clearInterval(r), o.style.opacity = "100%";
     };
-  }, [s, t.status]), t.status !== "passive" ? /* @__PURE__ */ n(
+  }, [s, t.status]), t.status !== "passive" ? /* @__PURE__ */ i(
     "div",
     {
       ref: s,
       onClick: () => l.popup(),
       title: a ? t.tooltip : void 0,
-      children: /* @__PURE__ */ n(v, { iconName: t.icon_name, size: i })
+      children: /* @__PURE__ */ i(v, { iconName: t.icon_name, size: n })
     }
-  ) : /* @__PURE__ */ n(c, {});
-}, D = ({
+  ) : /* @__PURE__ */ i(c, {});
+}, R = ({
   style: t = void 0,
-  direction: i = void 0,
+  direction: n = void 0,
   iconSize: a = 16,
   gap: l = void 0,
   tooltip: s = !1,
   ...r
 }) => {
   const o = f();
-  return /* @__PURE__ */ n(
+  return /* @__PURE__ */ i(
     "div",
     {
       ...r,
       style: {
         ...t,
         display: "flex",
-        flexDirection: i,
+        flexDirection: n,
         gap: l
       },
-      children: o.map((e) => /* @__PURE__ */ n(
+      children: o.map((e) => /* @__PURE__ */ i(
         y,
         {
           item: {
@@ -66,5 +67,5 @@ const y = ({ item: t, iconSize: i, tooltip: a = !1 }) => {
   );
 };
 export {
-  D as SysTray
+  R as SysTray
 };

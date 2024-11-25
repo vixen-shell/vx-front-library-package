@@ -2,6 +2,7 @@ import { jsx as d } from "react/jsx-runtime";
 import { createContext as c, useReducer as l, useEffect as u } from "react";
 import { BaseApi as n } from "../api/api.js";
 import "../api/ApiRoutes.js";
+import "dayjs";
 const t = class t {
   static set initialState(o) {
     if (t._initialState)
@@ -25,7 +26,7 @@ const t = class t {
 };
 t._initialState = void 0, t._reducer = void 0;
 let a = t;
-const p = c(void 0), y = ({ children: s }) => {
+const p = c(void 0), E = ({ children: s }) => {
   const [o, i] = l(
     a.reducer,
     a.initialState
@@ -51,5 +52,5 @@ const p = c(void 0), y = ({ children: s }) => {
 export {
   a as GlobalState,
   p as GlobalStateContext,
-  y as GlobalStateProvider
+  E as GlobalStateProvider
 };

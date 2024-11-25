@@ -1,10 +1,11 @@
 import { useRef as _, useEffect as d } from "react";
 import { BaseApi as h } from "../api/api.js";
-import { ApiRoutes as n } from "../api/ApiRoutes.js";
-import { useVxState as p } from "../stateHook/index.js";
+import { ApiRoutes as p } from "../api/ApiRoutes.js";
+import "dayjs";
+import { useVxState as n } from "../stateHook/index.js";
 async function w(o) {
   const e = await fetch(
-    n.popup_frame_show(h.urlParams.feature),
+    p.popup_frame_show(h.urlParams.feature),
     {
       method: "POST",
       headers: {
@@ -20,15 +21,15 @@ async function w(o) {
   return await e.json();
 }
 async function v() {
-  const o = await fetch(n.popup_frame_hide);
+  const o = await fetch(p.popup_frame_hide);
   if (!o.ok) {
     const e = await o.json();
     throw new Error(e.message);
   }
   return await o.json();
 }
-const P = () => {
-  const { state: o, setStateItem: e } = p();
+const g = () => {
+  const { state: o, setStateItem: e } = n();
   return { hide: () => {
     o.vx_popup_frame && (async () => {
       try {
@@ -38,20 +39,20 @@ const P = () => {
       }
     })();
   } };
-}, g = () => {
-  const { state: o, setStateItem: e } = p(), r = _(), a = ({
+}, j = () => {
+  const { state: o, setStateItem: e } = n(), r = _(), a = ({
     route: t,
     monitorId: c = void 0,
     position: u = void 0,
     size: f = void 0,
-    resizable: l = !1,
-    exitOnMouseLeave: m = !1
+    resizable: m = !1,
+    exitOnMouseLeave: l = !1
   }) => {
     o.vx_popup_frame || (e("vx_popup_frame", {
       position: u || null,
       size: f || null,
-      resizable: l,
-      exit_on_leave: m
+      resizable: m,
+      exit_on_leave: l
     }), (async () => {
       try {
         await w({
@@ -74,6 +75,6 @@ const P = () => {
   }, [o.vx_popup_frame_callback_data]), { show: a, onClosing: i };
 };
 export {
-  P as useHidePopupFrame,
-  g as usePopupFrame
+  g as useHidePopupFrame,
+  j as usePopupFrame
 };
