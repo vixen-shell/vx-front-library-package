@@ -76,11 +76,8 @@ const r = class r {
   static frame_close(t, a) {
     return e("http", `/frame/${t}/close/${a}`);
   }
-  static popup_frame_show(t) {
-    return e("http", `/popup_frame/${t}/show`);
-  }
 };
-r.ping = e("http", "/ping"), r.shutdown = e("http", "/shutdown"), r.gtk_fonts = e("http", "/gtk_fonts"), r.locale = e("http", "/locale"), r.vx_state = e("http", "/vx_state"), r.features_names = e("http", "/features/names"), r.popup_frame_hide = e("http", "/popup_frame/hide");
+r.ping = e("http", "/ping"), r.shutdown = e("http", "/shutdown"), r.gtk_fonts = e("http", "/gtk_fonts"), r.locale = e("http", "/locale"), r.vx_state = e("http", "/vx_state"), r.features_names = e("http", "/features/names");
 let u = r;
 export {
   u as ApiRoutes

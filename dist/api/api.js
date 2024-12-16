@@ -1,5 +1,5 @@
 import { ApiRoutes as a } from "./ApiRoutes.js";
-import { SocketEventHandler as u } from "./SocketEventHandler.js";
+import { SocketEventHandler as f } from "./SocketEventHandler.js";
 import { dayjsLocaleImporters as c } from "../theme/locale.js";
 async function o(i) {
   const e = await fetch(i);
@@ -9,7 +9,7 @@ async function o(i) {
   }
   return await e.json();
 }
-async function w() {
+async function u() {
   const i = await fetch(
     a.feature_data(s.urlParams.feature),
     {
@@ -33,9 +33,9 @@ const t = class t {
   static async init() {
     if (!await t.ping())
       throw new Error("Unable to acces Vixen Api");
-    t._features = (await o(a.features_names)).names, t._initialState = await o(a.vx_state), t._stateEventHandler = new u(
+    t._features = (await o(a.features_names)).names, t._initialState = await o(a.vx_state), t._stateEventHandler = new f(
       a.feature_state_socket(t.urlParams.feature)
-    ), t._defaultFonts = await o(a.gtk_fonts), t._locale = await o(a.locale), t._locales = (await w()).locales, t._isInit = !0;
+    ), t._defaultFonts = await o(a.gtk_fonts), t._locale = await o(a.locale), t._locales = (await u()).locales, t._isInit = !0;
   }
   static async ping() {
     try {
@@ -53,11 +53,11 @@ const t = class t {
     return t._features;
   }
   static get urlParams() {
-    const e = new URLSearchParams(window.location.search), r = e.get("feature"), n = e.get("frame"), l = e.get("route"), f = e.has("popup");
+    const e = new URLSearchParams(window.location.search), r = e.get("feature"), n = e.get("frame"), l = e.get("route");
     if (!r) throw new Error("Unable to find url parameter 'feature'");
     if (!n) throw new Error("Unable to find url parameter 'frame'");
     if (!l) throw new Error("Unable to find url parameter 'route'");
-    return { feature: r, frame: n, route: l, popup: f };
+    return { feature: r, frame: n, route: l };
   }
   static get state() {
     if (!t._isInit)

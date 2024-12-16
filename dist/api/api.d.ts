@@ -19,7 +19,6 @@ export declare class BaseApi {
         feature: string;
         frame: string;
         route: string;
-        popup: boolean;
     };
     static get state(): {
         initial: SocketEventData;

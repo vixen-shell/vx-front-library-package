@@ -8,7 +8,6 @@ export declare class Feature {
         feature: string;
         frame: string;
         route: string;
-        popup: boolean;
     };
     static get Link(): import('react').FC<{
         route: string;
@@ -57,29 +56,6 @@ export declare class Feature {
         };
         readonly Menu: () => {
             popup: (name: string) => () => void;
-        };
-        readonly PopupFrame: () => {
-            show: ({ route, monitorId, position, size, resizable, exitOnMouseLeave, }: {
-                route: string;
-                monitorId?: number;
-                position?: {
-                    x: number;
-                    y: number;
-                };
-                size?: {
-                    width: number;
-                    height: number;
-                };
-                resizable?: boolean;
-                exitOnMouseLeave?: boolean;
-            }) => void;
-            onClosing: (callback: (lastPosition: {
-                x: number;
-                y: number;
-            } | null, lastSize: {
-                width: number;
-                height: number;
-            } | null) => void) => void;
         };
         readonly Socket: (name: string) => import('../api').SocketEventHandler;
         readonly Locales: () => (locale: string, data?: (string | number)[]) => string;
